@@ -1,0 +1,25 @@
+server:
+  port: 8023
+  servlet:
+    context-path: /EyeconSpring 
+# database 연동 설정
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://project-db-campus.smhrd.com:3307/eyecon01
+    username: eyecon01
+    password: eyecon01
+    
+# spring data jpa 설정
+  jpa:
+    properties:
+      hibernate:
+        
+        format_sql: true
+        use_sql_comments: true
+        query:
+          in_clause_parameter_padding: true
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
