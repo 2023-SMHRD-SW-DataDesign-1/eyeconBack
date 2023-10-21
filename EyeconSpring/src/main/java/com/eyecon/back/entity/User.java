@@ -1,26 +1,33 @@
 package com.eyecon.back.entity;
 
 
+import javax.persistence.Column;
+
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.eyecon.back.dto.UserDTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Setter
-@Getter
-@Table(name="user")
-public class User {
+@javax.persistence.Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class User  {
 	//이메일
-	@Id
+	@javax.persistence.Id
+	
     private String email;
 
     // 비밀번호. 비밀번호
-	@Column
+	@javax.persistence.Column
 	private String pw;
 
     // 보유코인수. 보유코인수
@@ -32,7 +39,7 @@ public class User {
 	private String role;
 
     // 최근로그인일시. 최근로그인날짜
-	@jakarta.persistence.Column
+	@Column
 	private String date;
 	
     public static User toUser(UserDTO userDTO) {
