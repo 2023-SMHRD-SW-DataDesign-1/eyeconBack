@@ -3,6 +3,7 @@ package com.eyecon.back.service;
 import javax.transaction.Transactional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.eyecon.back.dto.StoreDTO;
 import com.eyecon.back.dto.UserDTO;
@@ -12,6 +13,8 @@ import com.eyecon.back.repository.StoreRepository;
 import com.eyecon.back.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+
+@Service
 @RequiredArgsConstructor
 public class UserService {
 	private final UserRepository userRepository;
