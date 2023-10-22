@@ -58,7 +58,7 @@ public class SecurityConfig {
 		.cors(Customizer.withDefaults())
 		.csrf(crsf -> crsf.disable())
 		.authorizeHttpRequests((authorizeRequest) -> authorizeRequest.
-				requestMatchers(new AntPathRequestMatcher("/auth/**"), new AntPathRequestMatcher("/verify/**"))
+				requestMatchers(new AntPathRequestMatcher("/auth/**"), new AntPathRequestMatcher("/verify/**"),new AntPathRequestMatcher("/join.do"),new AntPathRequestMatcher("/login.do"))
 				.permitAll()
 				.anyRequest().authenticated())
 		.sessionManagement(
@@ -87,6 +87,8 @@ public class SecurityConfig {
         return source;
 
     }
+	
+
 	
     
 }

@@ -27,7 +27,7 @@ public class ApplicationConfig {
 //    	this.userRepository = userRepository;
 //    }
     
-	@Bean 
+	@Bean  // 패스워드 암호화 => securityconfig에 해놨다가 뒤늦게 보고 지우고 왔당 설정해준거 ㄳ
     public PasswordEncoder passwordEncoder() { 
         return new BCryptPasswordEncoder(); 
     }

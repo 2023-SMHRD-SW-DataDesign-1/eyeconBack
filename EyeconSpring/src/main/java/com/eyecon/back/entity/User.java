@@ -1,11 +1,14 @@
 package com.eyecon.back.entity;
 
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -29,8 +32,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class User implements UserDetails {
-	//이메일
+	//고유식별키
 	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
+	//이메일
+	@Column(unique = true)
     private String email;
 
     // 비밀번호. 비밀번호
@@ -47,7 +55,7 @@ public class User implements UserDetails {
 
     // 최근로그인일시. 최근로그인날짜
 	@Column
-	private String date;
+	private LocalDateTime date;
 	
     public static User toUser(UserDTO userDTO) {
     	User user = new User();
