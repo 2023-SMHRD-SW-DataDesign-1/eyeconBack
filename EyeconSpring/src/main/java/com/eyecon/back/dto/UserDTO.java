@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
 
     private String email;
-    private String pw;
+    private String password;
     private Integer coin;
     private String role;
     private String date;
@@ -25,7 +25,7 @@ public class UserDTO {
     public static UserDTO toUserDTO(User user) {
     	UserDTO userDTO = new UserDTO();
     	userDTO.setEmail(user.getEmail());
-    	userDTO.setPw(user.getPw());
+    	userDTO.setPassword(user.getPassword());
     	userDTO.setCoin(user.getCoin());
     	userDTO.setRole(user.getRole());
     	userDTO.setDate(user.getDate());

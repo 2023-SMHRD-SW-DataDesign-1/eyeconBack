@@ -1,11 +1,18 @@
 package com.eyecon.back.entity;
 
 
-import javax.persistence.Column;
+import java.util.Collection;
+import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.eyecon.back.dto.UserDTO;
+
 
 
 import lombok.AllArgsConstructor;
@@ -15,20 +22,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@javax.persistence.Entity
+
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User  {
+public class User implements UserDetails {
 	//이메일
-	@javax.persistence.Id
-	
+	@Id
     private String email;
 
     // 비밀번호. 비밀번호
-	@javax.persistence.Column
-	private String pw;
+	@Column
+	private String password;
 
     // 보유코인수. 보유코인수
 	@Column
@@ -45,8 +52,50 @@ public class User  {
     public static User toUser(UserDTO userDTO) {
     	User user = new User();
     	user.setEmail(userDTO.getEmail());
-    	user.setPw(userDTO.getPw());
+    	user.setPassword(userDTO.getPassword());
     
         return user;
     }
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -9,9 +9,6 @@ import com.eyecon.back.entity.User;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
-
-    // 이메일로 회원 정보 조회 (select * from User where email=?)
-    public Optional<User> findByEmail(String email);
-	
+public interface UserRepository extends JpaRepository<User, Long> {
+   public Optional<User> findByEmail(String email); 
 }

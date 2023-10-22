@@ -25,7 +25,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath email = createString("email");
 
-    public final StringPath pw = createString("pw");
+    public final StringPath password = createString("password");
 
     public final StringPath role = createString("role");
 
