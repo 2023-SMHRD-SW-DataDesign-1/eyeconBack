@@ -24,7 +24,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void join(UserDTO userDTO, Store store) {
+    public void join(UserDTO userDTO, StoreDTO storeDTO) {
         // 1. dto -> entity 변환
         User user = User.toUser(userDTO);
 
@@ -34,7 +34,7 @@ public class UserService {
 
         // 3. repository의 save 메서드 호출
         userRepository.save(user);
-        
+        Store store = Store.toStore(storeDTO);
 //        Store store = Store.toStore()
 //        storeDTO.setEmail(user.getEmail());
 //        storeRepository.save(store);

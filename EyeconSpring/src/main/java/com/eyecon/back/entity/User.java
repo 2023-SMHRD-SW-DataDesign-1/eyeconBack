@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,6 +41,7 @@ public class User implements UserDetails {
 	
 	//이메일
 	@Column(unique = true)
+//	@OneToOne
     private String email;
 
     // 비밀번호. 비밀번호
@@ -105,5 +108,10 @@ public class User implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

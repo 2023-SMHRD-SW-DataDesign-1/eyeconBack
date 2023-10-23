@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.eyecon.back.dto.StoreDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +29,7 @@ public class Store {
     private Long id;
 	
 	@Column
+	@OneToOne
 	private String email;
 
 	@Column
@@ -38,6 +43,11 @@ public class Store {
 	
 	@Column	
 	private String place2;
+
+	public static Store toStore(StoreDTO storeDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
