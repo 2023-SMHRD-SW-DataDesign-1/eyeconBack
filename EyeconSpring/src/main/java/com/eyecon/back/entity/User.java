@@ -10,19 +10,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.eyecon.back.dto.UserDTO;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+
+
 
 
 @Entity
@@ -97,6 +99,12 @@ public class User implements UserDetails {
 	}
 
 
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
@@ -108,6 +116,7 @@ public class User implements UserDetails {
 		// TODO Auto-generated method stub
 		return this.pw;
 	}
+
 
 
 }
