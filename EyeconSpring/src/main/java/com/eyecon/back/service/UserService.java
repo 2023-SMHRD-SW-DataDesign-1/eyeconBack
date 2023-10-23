@@ -1,22 +1,46 @@
 package com.eyecon.back.service;
 
+import javax.transaction.Transactional;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.eyecon.back.dto.StoreDTO;
 import com.eyecon.back.dto.UserDTO;
+import com.eyecon.back.entity.Store;
 import com.eyecon.back.entity.User;
+import com.eyecon.back.repository.StoreRepository;
 import com.eyecon.back.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+
+@Service
 @RequiredArgsConstructor
 public class UserService {
 	private final UserRepository userRepository;
-	 
-	public void join(UserDTO userDTO) {
+	private final StoreRepository storeRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Transactional
+    public void join(UserDTO userDTO, Store store) {
         // 1. dto -> entity 변환
-        // 2. repository의 save 메서드 호출
         User user = User.toUser(userDTO);
+
+        // 2. 비밀번호 암호화
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPw(encodedPassword);
+
+        // 3. repository의 save 메서드 호출
         userRepository.save(user);
-        // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
-    }	
-	
+        
+//        Store store = Store.toStore()
+//        storeDTO.setEmail(user.getEmail());
+//        storeRepository.save(store);
+        
+        store.setEmail(user.getEmail());
+        storeRepository.save(store);
+        
+    }
 	
 
 }

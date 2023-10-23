@@ -1,6 +1,7 @@
 package com.eyecon.back.entity;
 
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -30,19 +31,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class User implements UserDetails {
-	//이메일
-	
+
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 	
+	//이메일
 	@Column(unique = true)
     private String email;
 
     // 비밀번호. 비밀번호
 	@Column
-	private String password;
+	private String pw;
 
     // 보유코인수. 보유코인수
 	@Column
@@ -54,12 +55,12 @@ public class User implements UserDetails {
 
     // 최근로그인일시. 최근로그인날짜
 	@Column
-	private String date;
+	private LocalDateTime date;
 	
     public static User toUser(UserDTO userDTO) {
     	User user = new User();
     	user.setEmail(userDTO.getEmail());
-    	user.setPassword(userDTO.getPassword());
+    	user.setPw(userDTO.getPw());
     
         return user;
     }
@@ -96,8 +97,16 @@ public class User implements UserDetails {
 	}
 
 	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.pw;
+	}
+
+	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.email;
 	}
+
+
 }

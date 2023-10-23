@@ -14,7 +14,7 @@ import org.springframework.util.ObjectUtils;
 import com.eyecon.back.configuration.JwtService;
 import com.eyecon.back.dto.AuthVO;
 import com.eyecon.back.entity.TokenType;
-import com.eyecon.back.entity.Tokens;
+import com.eyecon.back.entity.Token;
 import com.eyecon.back.entity.User;
 import com.eyecon.back.repository.TokenRepository;
 import com.eyecon.back.repository.UserRepository;
@@ -46,7 +46,7 @@ public class AuthService {
     }
 
     private void revokeAllUserTokens(User user) {
-        List<Tokens> validTokens = tokenRepository.findAllValidTokenByUserId(user.getEmail());
+        List<Token> validTokens = tokenRepository.findAllValidTokenByUserId(user.getEmail());
         if (!validTokens.isEmpty()) {
             validTokens.forEach( t-> {
                 t.setExpired(true);
@@ -56,7 +56,7 @@ public class AuthService {
         }
     }
     private void saveToken (User user, String jwtToken) {
-        Tokens token = Tokens.builder()
+        Token token = Token.builder()
         .token(jwtToken)
         .tokenType(TokenType.BEARER)
         .expired(false)
@@ -72,7 +72,7 @@ public class AuthService {
             final var userEmail = jwtService.extractUsername(refreshToken);
             if (userEmail != null) {
                 var user = userRepository.findByEmail(userEmail);
-                List<Tokens> validRefreshTokens = tokenRepository.findByTokenAndUserNameAndRevoked(refreshToken, userEmail, false);
+                List<Token> validRefreshTokens = tokenRepository.findByTokenAndUserNameAndRevoked(refreshToken, userEmail, false);
                 if (user.isPresent() && validRefreshTokens.size() > 0 && jwtService.isTokenValid(refreshToken, user.get())) {
                     accessToken = jwtService.generateToken(user.get());
                     saveToken(user.get(), accessToken);

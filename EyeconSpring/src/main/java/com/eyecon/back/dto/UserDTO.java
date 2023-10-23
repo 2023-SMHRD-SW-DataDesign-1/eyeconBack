@@ -1,5 +1,7 @@
 package com.eyecon.back.dto;
 
+import java.time.LocalDateTime;
+
 import com.eyecon.back.entity.User;
 
 
@@ -11,26 +13,31 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class UserDTO {
 
-	private int userId;
+	
+	private Long id;
+
     private String email;
-    private String password;
-    private Integer coin;
+    private String pw;
+    private int coin;
     private String role;
-    private String date;
+    private LocalDateTime date;
     
 	
     
     public static UserDTO toUserDTO(User user) {
     	UserDTO userDTO = new UserDTO();
+    	
+    	userDTO.setId(user.getId());
     	userDTO.setEmail(user.getEmail());
-    	userDTO.setPassword(user.getPassword());
+    	userDTO.setPw(user.getPw());
     	userDTO.setCoin(user.getCoin());
     	userDTO.setRole(user.getRole());
     	userDTO.setDate(user.getDate());
         return userDTO;
     }
+
+
 	
 }

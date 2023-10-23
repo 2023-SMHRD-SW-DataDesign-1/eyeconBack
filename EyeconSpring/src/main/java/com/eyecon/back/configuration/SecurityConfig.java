@@ -55,10 +55,10 @@ public class SecurityConfig {
 	public SecurityFilterChain securityfilterChain(HttpSecurity http) throws Exception {
 		
 		http
-		.cors(Customizer.withDefaults())
+		.cors().and()
 		.csrf(crsf -> crsf.disable())
 		.authorizeHttpRequests((authorizeRequest) -> authorizeRequest.
-				requestMatchers(new AntPathRequestMatcher("/auth/**"), new AntPathRequestMatcher("/verify/**"))
+				requestMatchers(new AntPathRequestMatcher("/auth/**"),new AntPathRequestMatcher("/join.do"),new AntPathRequestMatcher("/login.do"))
 				.permitAll()
 				.anyRequest().authenticated())
 		.sessionManagement(
@@ -76,17 +76,23 @@ public class SecurityConfig {
 		return http.build();
 	}
 	
-	@Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-        configuration.setAllowedMethods(List.of("GET", "POST"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+	
+	
+	
+	  @Bean CorsConfigurationSource corsConfigurationSource() { CorsConfiguration
+	  configuration = new CorsConfiguration();
+	  configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+	  configuration.setAllowedMethods(List.of("GET", "POST"));
+	  configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+	  configuration.setAllowCredentials(true); UrlBasedCorsConfigurationSource
+	  source = new UrlBasedCorsConfigurationSource();
+	  source.registerCorsConfiguration("/**", configuration); return source;
+	  
+	  }
+	 
+	 
+	
 
-    }
 	
     
 }

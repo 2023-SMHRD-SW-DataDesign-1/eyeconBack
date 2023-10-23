@@ -15,12 +15,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="tokens", schema = "public")
+@Table(name="token", schema = "public")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Tokens  {
+public class Token  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
