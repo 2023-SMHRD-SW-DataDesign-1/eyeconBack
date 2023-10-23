@@ -48,6 +48,23 @@ public class UserService {
         Optional<User> userOptional = userRepository.findByEmail(email);
         return userOptional.isPresent();
     }
+    
+	@Transactional
+	public int removeCoin(String email) {
+	   UserDTO userDTO = new UserDTO();
+		// 먼저 사용자를 찾습니다.
+	    User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + email));
+	    
+	    // coin 값을 감소시킵니다.
+	    user.setCoin(user.getCoin() - 1);
+	    
+	    // 변경된 엔티티를 다시 저장합니다.
+	    userRepository.save(user);
+	    
+	    // 변경된 coin 값을 반환합니다.		
+		return userDTO.getCoin();
+	}
+	
 
 
 	

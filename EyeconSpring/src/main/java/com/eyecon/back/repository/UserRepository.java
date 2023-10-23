@@ -11,4 +11,7 @@ import com.eyecon.back.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
    public Optional<User> findByEmail(String email); 
+   
+
+   
 }

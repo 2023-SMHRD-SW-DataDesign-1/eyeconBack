@@ -41,4 +41,22 @@ public class UserController {
         
         return userService.checkEmail(userDTO.getEmail());
     }
+    
+	@RequestMapping("/verify/removeCoin")
+	public int removeCoin(String email) {
+		// jwt 토큰 되면 토큰에서 이메일 추출하는 코드 써야함
+		// ?????
+		UserDTO userDTO = new UserDTO();
+		System.out.println("paymentController.removeCoin");
+		
+        System.out.println("이에일 : " + email);
+		userService.removeCoin(email);
+		
+		
+		return userDTO.getCoin();
+	}
+    
+    
+    
+    
 }
