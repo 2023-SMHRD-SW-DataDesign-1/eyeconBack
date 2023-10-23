@@ -29,7 +29,7 @@ public class UserService {
         User user = User.toUser(userDTO);
 
         // 2. 비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(user.getPw());
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPw(encodedPassword);
 
         // 3. repository의 save 메서드 호출

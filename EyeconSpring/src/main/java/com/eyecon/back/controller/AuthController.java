@@ -37,7 +37,7 @@ public class AuthController {
             .pw(login.pw())
             .build(); 
         System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
+        System.out.println(user.getPw());
         AuthVO authVo = authService.authenticate(user);
         ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", authVo.refreshToken())
             .httpOnly(true)
