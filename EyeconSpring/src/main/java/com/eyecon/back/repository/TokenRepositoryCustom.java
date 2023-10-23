@@ -2,10 +2,10 @@ package com.eyecon.back.repository;
 
 import java.util.List;
 
-import com.eyecon.back.entity.Tokens;
+import com.eyecon.back.entity.Token;
 
 
 
 public interface TokenRepositoryCustom  {
-	List<Tokens> findAllValidTokenByUserId(String userName);
+	List<Token> findAllValidTokenByUserId(String userName);
 }

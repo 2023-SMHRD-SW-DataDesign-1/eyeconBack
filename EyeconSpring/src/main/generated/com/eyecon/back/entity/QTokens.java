@@ -13,7 +13,7 @@ import com.querydsl.core.types.Path;
  * QTokens is a Querydsl query type for Tokens
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QTokens extends EntityPathBase<Tokens> {
+public class QTokens extends EntityPathBase<Token> {
 
     private static final long serialVersionUID = 1141901966L;
 
@@ -32,15 +32,15 @@ public class QTokens extends EntityPathBase<Tokens> {
     public final StringPath userName = createString("userName");
 
     public QTokens(String variable) {
-        super(Tokens.class, forVariable(variable));
+        super(Token.class, forVariable(variable));
     }
 
-    public QTokens(Path<? extends Tokens> path) {
+    public QTokens(Path<? extends Token> path) {
         super(path.getType(), path.getMetadata());
     }
 
     public QTokens(PathMetadata metadata) {
-        super(Tokens.class, metadata);
+        super(Token.class, metadata);
     }
 
 }

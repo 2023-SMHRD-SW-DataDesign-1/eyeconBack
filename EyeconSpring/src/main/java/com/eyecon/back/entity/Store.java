@@ -29,7 +29,7 @@ public class Store {
     private Long id;
 	
 	@Column
-	@OneToOne
+//	@OneToOne
 	private String email;
 
 	@Column

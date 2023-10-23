@@ -5,12 +5,12 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.eyecon.back.entity.Tokens;
+import com.eyecon.back.entity.Token;
 
 
-public interface TokenRepository extends JpaRepository<Tokens, Long>, TokenRepositoryCustom {
-    Optional<Tokens> findByToken(String token);
+public interface TokenRepository extends JpaRepository<Token, Long>, TokenRepositoryCustom {
+    Optional<Token> findByToken(String token);
     
-    List<Tokens> findByTokenAndUserNameAndRevoked(String refreshToken, String userEmail, boolean revoked);
+    List<Token> findByTokenAndUserNameAndRevoked(String refreshToken, String userEmail, boolean revoked);
    
 }

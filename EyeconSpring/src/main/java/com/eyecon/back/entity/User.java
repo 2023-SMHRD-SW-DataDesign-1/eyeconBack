@@ -18,14 +18,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.eyecon.back.dto.UserDTO;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+
+
 
 
 @Entity
@@ -34,14 +33,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class User implements UserDetails {
-	//고유식별키
+
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
 	//이메일
 	@Column(unique = true)
-//	@OneToOne
     private String email;
 
     // 비밀번호. 비밀번호
@@ -74,44 +73,50 @@ public class User implements UserDetails {
 		return null;
 	}
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
+
 
 	public String getEmail() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.email;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.email;
+	}
+
+
+
 }

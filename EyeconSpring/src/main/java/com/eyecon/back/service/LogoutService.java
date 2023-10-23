@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
 import com.eyecon.back.configuration.JwtService;
-import com.eyecon.back.entity.Tokens;
+import com.eyecon.back.entity.Token;
 import com.eyecon.back.repository.TokenRepository;
 
 import io.micrometer.common.util.StringUtils;
@@ -39,7 +39,7 @@ public class LogoutService implements LogoutHandler {
     }
 
     private void revokeAllUserTokens(String username) {
-        List<Tokens> validTokens = tokenRepository.findAllValidTokenByUserId(username);
+        List<Token> validTokens = tokenRepository.findAllValidTokenByUserId(username);
         if (!validTokens.isEmpty()) {
             validTokens.forEach(t -> {
                 t.setExpired(true);

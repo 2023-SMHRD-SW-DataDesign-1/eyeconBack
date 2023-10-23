@@ -1,6 +1,7 @@
 package com.eyecon.back.configuration;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 public class QueryDslConfig {
 	 
 //	  @PersistenceContext(unitName = "primaryEntityManager") 
-	  @javax.persistence.PersistenceContext
+	  @PersistenceContext
 	  private EntityManager JpaTransactionManager;
 //	  
 //	  @PersistenceContext(unitName = "secondaryEntityManager") private
