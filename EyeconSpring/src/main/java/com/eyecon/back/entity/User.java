@@ -96,14 +96,15 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return this.pw;
-	}
 
 	@Override
 	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.email;
+	}
+
+	@Override
+	public String getPassword() {
 		// TODO Auto-generated method stub
 		return this.email;
 	}
