@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 public class UserDTO {
 
+	private int userId;
     private String email;
     private String password;
     private Integer coin;
