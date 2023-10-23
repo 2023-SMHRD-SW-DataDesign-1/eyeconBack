@@ -17,7 +17,7 @@ public class UserDTO {
 
 	private Long id;
     private String email;
-    private String password;
+    private String pw;
     private int coin;
     private String role;
     private LocalDateTime date;
@@ -29,7 +29,7 @@ public class UserDTO {
     	
     	userDTO.setId(user.getId());
     	userDTO.setEmail(user.getEmail());
-    	userDTO.setPassword(user.getPassword());
+    	userDTO.setPw(user.getPw());
     	userDTO.setCoin(user.getCoin());
     	userDTO.setRole(user.getRole());
     	userDTO.setDate(user.getDate());

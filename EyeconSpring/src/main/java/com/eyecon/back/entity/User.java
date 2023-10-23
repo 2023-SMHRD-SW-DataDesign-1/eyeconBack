@@ -43,7 +43,7 @@ public class User implements UserDetails {
 
     // 비밀번호. 비밀번호
 	@Column
-	private String password;
+	private String pw;
 
     // 보유코인수. 보유코인수
 	@Column
@@ -60,7 +60,7 @@ public class User implements UserDetails {
     public static User toUser(UserDTO userDTO) {
     	User user = new User();
     	user.setEmail(userDTO.getEmail());
-    	user.setPassword(userDTO.getPassword());
+    	user.setPw(userDTO.getPw());
     
         return user;
     }

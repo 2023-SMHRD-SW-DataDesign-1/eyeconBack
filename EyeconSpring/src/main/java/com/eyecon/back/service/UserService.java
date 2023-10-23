@@ -1,5 +1,7 @@
 package com.eyecon.back.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,8 +29,8 @@ public class UserService {
         User user = User.toUser(userDTO);
 
         // 2. 비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(user.getPw());
+        user.setPw(encodedPassword);
 
         // 3. repository의 save 메서드 호출
         userRepository.save(user);
@@ -41,6 +43,13 @@ public class UserService {
         storeRepository.save(store);
         
     }
+    
+    public boolean checkEmail(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        return userOptional.isPresent();
+    }
+
+
 	
 
 }

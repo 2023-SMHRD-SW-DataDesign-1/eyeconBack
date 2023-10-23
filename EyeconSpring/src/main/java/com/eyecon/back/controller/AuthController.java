@@ -30,7 +30,7 @@ public class AuthController {
 	public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest login) {
         User user = User.builder()
             .email(login.email()) 
-            .password(login.password())
+            .pw(login.password())
             .build(); 
         AuthVO authVo = authService.authenticate(user);
 
