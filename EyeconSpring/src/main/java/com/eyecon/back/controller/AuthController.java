@@ -67,13 +67,22 @@ public class AuthController {
 	
 	@PostMapping("/refresh")
 	public ResponseEntity<AuthResponse> refreshToken(@CookieValue String refreshToken, HttpServletResponse response) throws IOException {
+		System.out.println("/refresh 도착");
         String newAccessToken = "";
         java.util.Optional<String> refreshedAccessToken = authService.refreshToken(refreshToken, response);
         if (refreshedAccessToken.isPresent()) {
             newAccessToken = refreshedAccessToken.get();
         } 
+        ResponseCookie accessCookie = ResponseCookie.from("accessToken", newAccessToken)
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(1800)
+                .domain("localhost")
+                .build();
         return ResponseEntity.ok()
-            .body(new AuthResponse(newAccessToken));
+        	.header(HttpHeaders.SET_COOKIE, accessCookie.toString())
+            .body(null);
     }
 	
 }
