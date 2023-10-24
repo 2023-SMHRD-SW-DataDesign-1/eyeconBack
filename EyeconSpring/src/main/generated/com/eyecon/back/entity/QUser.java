@@ -21,13 +21,13 @@ public class QUser extends EntityPathBase<User> {
 
     public final NumberPath<Integer> coin = createNumber("coin", Integer.class);
 
-    public final StringPath date = createString("date");
+    public final DateTimePath<java.time.LocalDateTime> date = createDateTime("date", java.time.LocalDateTime.class);
 
     public final StringPath email = createString("email");
 
-    public final StringPath id = createString("id");
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath password = createString("password");
+    public final StringPath pw = createString("pw");
 
     public final StringPath role = createString("role");
 
