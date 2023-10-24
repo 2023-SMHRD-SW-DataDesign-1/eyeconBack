@@ -26,13 +26,13 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
       
 application:
   security:
     jwt:
       secret-key: 3498237402398709832750923759823509283750293875098237E3432423423A4A561221ABD2324325FGFGS3535
-      expiration: 6000 # 30분 acess
+      expiration: 3000 # 30분 acess
       refresh-token:
         expiration: 604800000 # 7day refresh

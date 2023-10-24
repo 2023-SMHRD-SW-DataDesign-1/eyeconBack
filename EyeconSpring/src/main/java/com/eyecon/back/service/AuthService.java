@@ -46,13 +46,21 @@ public class AuthService {
     }
 
     private void revokeAllUserTokens(User user) {
-        List<Token> validTokens = tokenRepository.findAllValidTokenByUserId(user.getEmail());
-        if (!validTokens.isEmpty()) {
+    	
+    	 
+    	
+    	List<Token> validTokens = tokenRepository.findAllValidTokenByUserId(user.getEmail());
+		
+    	
+		
+        if (validTokens != null && !validTokens.isEmpty()) {
             validTokens.forEach( t-> {
                 t.setExpired(true);
                 t.setRevoked(true);
                 tokenRepository.save(t);
             });
+        }else {
+        	
         }
     }
     private void saveToken (User user, String jwtToken) {

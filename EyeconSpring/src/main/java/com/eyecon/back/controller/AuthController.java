@@ -19,6 +19,7 @@ import com.eyecon.back.dto.AuthResponse;
 import com.eyecon.back.dto.AuthVO;
 import com.eyecon.back.entity.User;
 import com.eyecon.back.service.AuthService;
+import com.eyecon.back.service.UserService;
 import com.google.common.net.HttpHeaders;
 
 import lombok.RequiredArgsConstructor;
@@ -29,13 +30,15 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/auth")
 public class AuthController {
 	private final AuthService authService;
+	private final UserService userService;
 
 	@PostMapping("/login")
 	public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest login) {
         User user = User.builder()
             .email(login.email()) 
             .pw(login.pw())
-            .build(); 
+            .build();
+//        userService.findUser(user);
         System.out.println(user.getEmail());
         System.out.println(user.getPw());
         AuthVO authVo = authService.authenticate(user);

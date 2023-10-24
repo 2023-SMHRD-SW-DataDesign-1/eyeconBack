@@ -22,19 +22,24 @@ public class TokenRepositoryCustomImpl implements TokenRepositoryCustom {
 	@Override
 	public List<Token> findAllValidTokenByUserId(@NonNull String userName) {
 
-//		  QTokens t = QTokens.tokens;
-//		  
-//		  JPAQuery<Tuple> query = queryFactory .select(t.id, t.token, t.tokenType,
-//		  t.expired, t.revoked, t.userName) .from(t) .where( t.userName.eq(userName));
-//		  
-//		  return query.fetch() .stream().map(tuple -> Token.builder()
-//		  .id(tuple.get(t.id)) .token(tuple.get(t.token))
-//		  .tokenType(tuple.get(t.tokenType)) .expired(tuple.get(t.expired))
-//		  .revoked(tuple.get(t.revoked)) .userName(tuple.get(t.userName)) .build()
-//		  ).toList();
-		List<Token> a = null;
-		return  a;
-//		 
+
+		/*
+		 * QTokens t = QTokens.tokens;
+		 * 
+		 * JPAQuery<Tuple> query = queryFactory .select(t.id, t.token, t.tokenType,
+		 * t.expired, t.revoked, t.userName) .from(t) .where( t.userName.eq(userName));
+		 * 
+		 * return query.fetch() .stream().map(tuple -> Token.builder()
+		 * .id(tuple.get(t.id)) .token(tuple.get(t.token))
+		 * .tokenType(tuple.get(t.tokenType)) .expired(tuple.get(t.expired))
+		 * .revoked(tuple.get(t.revoked)) .userName(tuple.get(t.userName)) .build()
+		 * ).toList();
+		 */
+		
+		List<Token> a =null;
+		return a;
+		 
+
 	}
 
 }
