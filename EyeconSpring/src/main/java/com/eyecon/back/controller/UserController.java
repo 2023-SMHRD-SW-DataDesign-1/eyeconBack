@@ -51,14 +51,14 @@ public class UserController {
     }
     
 	@RequestMapping("/removeCoin")
-	public int removeCoin(@RequestBody String email) {
+	public int removeCoin(@RequestBody UserDTO userDTO) {
 		// jwt 토큰 되면 토큰에서 이메일 추출하는 코드 써야함
 		// ?????
-		UserDTO userDTO = new UserDTO();
-		System.out.println("paymentController.removeCoin");
+	
+		System.out.println("UserController.removeCoin");
 		
-        System.out.println("이에일 : " + email);
-		userService.removeCoin(email);
+        System.out.println("이에일 : " + userDTO.getEmail());
+		userService.removeCoin(userDTO);
 		
 		
 		return userDTO.getCoin();
