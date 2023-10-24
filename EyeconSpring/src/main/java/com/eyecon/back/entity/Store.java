@@ -4,11 +4,15 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.eyecon.back.dto.StoreDTO;
 
@@ -22,26 +26,31 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name="store")
 public class Store {
 
 	@Id
+	@Column(name="Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column
-//	@OneToOne
-	private String email;
+	@ManyToOne
+	@JoinColumn(name="email", referencedColumnName = "email")
+	private User user;
+//	
+//	@Column(name="email")
+//	private String email;
 
-	@Column
+	@Column(name="storename")
 	private String storename;
 	
-	@Column
+	@Column(name="category")
 	private String category; //편의점인지 마트인지
 
-	@Column
+	@Column(name=" place1")
 	private String place1;
 	
-	@Column	
+	@Column(name=" place2")
 	private String place2;
 
 	public static Store toStore(StoreDTO storeDTO) {
@@ -49,7 +58,7 @@ public class Store {
 		return null;
 	}
 	
-	
+
 	
 	
 	

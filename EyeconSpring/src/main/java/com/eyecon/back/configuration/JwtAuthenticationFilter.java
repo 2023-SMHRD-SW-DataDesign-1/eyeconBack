@@ -58,7 +58,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     	            .filter(c -> c.getName().equals("accessToken"))
     	            .findFirst().map(Cookie::getValue)
     	            .orElse(null);
-    	    // 나머지 코드...
     	}else {
     		
     	}

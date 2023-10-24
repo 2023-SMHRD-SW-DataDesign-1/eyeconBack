@@ -1,5 +1,6 @@
 package com.eyecon.back.service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -39,7 +40,7 @@ public class UserService {
 //        storeDTO.setEmail(user.getEmail());
 //        storeRepository.save(store);
         
-        store.setEmail(user.getEmail());
+//         store.setUser(user.getEmail());
         storeRepository.save(store);
         
     }
@@ -64,7 +65,13 @@ public class UserService {
 	    // 변경된 coin 값을 반환합니다.		
 		return userDTO.getCoin();
 	}
-	
+//
+//	public User findUser(User user) {
+//		Optional<User> findUser = userRepository.findByEmail(user.getEmail());
+//		if(!findUser)
+//		
+//	}
+//	
 
 
 	

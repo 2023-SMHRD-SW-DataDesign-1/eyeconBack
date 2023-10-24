@@ -2,8 +2,12 @@ package com.eyecon.back.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eyecon.back.dto.StoreDTO;
@@ -22,7 +26,7 @@ public class UserController {
 	private final UserService userService;
 	
     @RequestMapping("/join")
-    public String join(@RequestBody UserDTO userDTO, StoreDTO storeDTO ) {
+    public String join(@RequestHeader StoreDTO storeDTO, UserDTO userDTO ) {
         System.out.println("UserController.join");
         System.out.println("userDTO : " + userDTO);
         System.out.println("storeDTO : " + storeDTO);

@@ -22,6 +22,7 @@ public class TokenRepositoryCustomImpl implements TokenRepositoryCustom {
 	@Override
 	public List<Token> findAllValidTokenByUserId(@NonNull String userName) {
 
+
 		/*
 		 * QTokens t = QTokens.tokens;
 		 * 
@@ -38,6 +39,7 @@ public class TokenRepositoryCustomImpl implements TokenRepositoryCustom {
 		List<Token> a =null;
 		return a;
 		 
+
 	}
 
 }

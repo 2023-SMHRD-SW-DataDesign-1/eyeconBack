@@ -24,11 +24,11 @@ public class StoreDTO {
 	private String place2;
 	
 	
-    public static StoreDTO toStoreDTO(Store store) {
+    public static StoreDTO toStoreDTO(Store store, User user) {
     	StoreDTO storeDTO = new StoreDTO();
     	
     	storeDTO.setId(store.getId());
-    	storeDTO.setEmail(store.getEmail());
+    	storeDTO.setEmail(user.getEmail());
     	storeDTO.setStorename(store.getStorename());
     	storeDTO.setCategory(store.getCategory());
     	storeDTO.setPlace1(store.getPlace1());

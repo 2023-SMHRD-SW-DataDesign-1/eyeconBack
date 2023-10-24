@@ -2,16 +2,22 @@ package com.eyecon.back.entity;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,32 +38,38 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name="user")
 public class User implements UserDetails {
 
 	
 	@Id
+	@Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
 	//이메일
-	@Column(unique = true)
+//	@ManyToOne // 또는 @ManyToOne
+	@Column(name = "email", unique = true)
     private String email;
 
     // 비밀번호. 비밀번호
-	@Column
+	@Column(name="pw")
 	private String pw;
 
     // 보유코인수. 보유코인수
-	@Column
+	@Column(name="coin")
 	private Integer coin;
 
     // 권한분류. 권한분류
-	@Column
+	@Column(name="role")
 	private String role;
 
     // 최근로그인일시. 최근로그인날짜
-	@Column
+	@Column(name="date")
 	private LocalDateTime date;
+	
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Store> store =new ArrayList<>();
 	
     public static User toUser(UserDTO userDTO) {
     	User user = new User();
@@ -99,10 +111,6 @@ public class User implements UserDetails {
 	}
 
 
-	public String getEmail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	@Override
