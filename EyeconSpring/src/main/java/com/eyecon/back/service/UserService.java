@@ -31,11 +31,11 @@ public class UserService {
         user.setId(joinDTO.getId());
         user.setEmail(joinDTO.getEmail());
         user.setPw(joinDTO.getPw());
-        user.setCoin(joinDTO.getCoin());
+        user.setCoin(joinDTO.getCoin()+1);
 
         //비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        
+        String encodedPassword = passwordEncoder.encode(joinDTO.getPw());
+        user.setPw(encodedPassword);      
         // User 엔티티 저장
         userRepository.save(user);
 
@@ -61,11 +61,12 @@ public class UserService {
         return userOptional.isPresent();
     }
     
+    
 	@Transactional
-	public int removeCoin(String email) {
+	public int removeCoin(UserDTO userDTO) {
 	   UserDTO userDTO = new UserDTO();
 		// 먼저 사용자를 찾습니다.
-	    User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + email));
+	    User user = userRepository.findByEmail(userDTO.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + email));
 	    
 	    // coin 값을 감소시킵니다.
 	    user.setCoin(user.getCoin() - 1);
