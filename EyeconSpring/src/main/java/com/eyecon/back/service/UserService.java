@@ -63,27 +63,28 @@ public class UserService {
     }
     
     
-	@Transactional
-	public int removeCoin(UserDTO userDTO) {
-	   UserDTO userDTO = new UserDTO();
-		// 먼저 사용자를 찾습니다.
-	    User user = userRepository.findByEmail(userDTO.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + email));
-	    
-	    // coin 값을 감소시킵니다.
-	    user.setCoin(user.getCoin() - 1);
-	    
-	    // 변경된 엔티티를 다시 저장합니다.
-	    userRepository.save(user);
-	    
-	    // 변경된 coin 값을 반환합니다.		
-		return userDTO.getCoin();
-	}
-//
-//	public User findUser(User user) {
-//		Optional<User> findUser = userRepository.findByEmail(user.getEmail());
-//		if(!findUser)
-//		
-//	}
+    @Transactional
+    public int removeCoin(UserDTO userDTO) {
+        // 먼저 사용자를 찾습니다.
+        Optional<User> optionalUser = userRepository.findByEmail(userDTO.getEmail());
+
+        // 사용자가 존재하는지 확인합니다.
+        if (!optionalUser.isPresent()) {
+            throw new IllegalArgumentException("아이디가 없으면?" + userDTO.getEmail());
+        }
+
+        User user = optionalUser.get();
+
+        // coin 값을 감소시킵니다.
+        user.setCoin(user.getCoin() - 1);
+
+        // 변경된 엔티티를 다시 저장합니다.
+        userRepository.save(user);
+
+        // 변경된 coin 값을 반환합니다.
+        return user.getCoin();
+    }
+
 	
 
 
