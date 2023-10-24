@@ -1,11 +1,11 @@
 server:
   port: 8023
-#  servlet:
+  servlet:
+    context-path: /EyeconSpring 
 #    session:
 #      cookie:
 #        samesite: None
-  servlet:
-    context-path: /EyeconSpring 
+
 # database 연동 설정
 spring:
   datasource:

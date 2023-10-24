@@ -1,58 +1,38 @@
 package com.eyecon.back.method;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.Principal;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.servlet.AsyncContext;
-import javax.servlet.DispatcherType;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.crypto.SecretKey;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpUpgradeHandler;
-import javax.servlet.http.Part;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
 public class TokenToEmail {
 
-	
-	public String getEmailFromToken() {
-		HttpServletRequest request = null ;
-		
-    Cookie[] cookies = request.getCookies();
-    String token = null;
-    for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("access_token")) {
-            token = cookie.getValue();
-            break;
+    public String getEmailFromToken(HttpServletRequest request) {
+        System.out.println("jwt 토큰 이메일로 변환");
+    	Cookie[] cookies = request.getCookies();
+        String token = null;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("access_token")) {
+                token = cookie.getValue();
+                break;
+            }
         }
-    }
 
-    if (token != null) {
-        Claims claims = Jwts.parser()
-                            .setSigningKey("3498237402398709832750923759823509283750293875098237E3432423423A4A561221ABD2324325FGFGS3535")
-                            .parseClaimsJws(token)
-                            .getBody();
-        return claims.getSubject();
-    }
+        if (token != null) {
+            String key = "3498237402398709832750923759823509283750293875098237E3432423423A4A561221ABD2324325FGFGS3535";
+            SecretKey secret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(key));
+            Claims claims = Jwts.parserBuilder()
+                                .setSigningKey(secret)
+                                .build()
+                                .parseClaimsJws(token)
+                                .getBody();
+            return claims.getSubject();
+        }
 
-    return null;
-	
-	}
-	
-	
+        return null;
+    }
 }
