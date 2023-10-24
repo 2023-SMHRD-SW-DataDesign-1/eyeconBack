@@ -58,10 +58,11 @@ public class UserController {
 		System.out.println("UserController.removeCoin");
 		
         System.out.println("이에일 : " + userDTO.getEmail());
-		userService.removeCoin(userDTO);
+        int updatedCoin = userService.removeCoin(userDTO);
 		
+		System.out.println(updatedCoin);
 		
-		return userDTO.getCoin();
+		return updatedCoin;
 	}
     
     
