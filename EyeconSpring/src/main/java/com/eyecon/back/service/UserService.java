@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.eyecon.back.dto.JoinDTO;
 import com.eyecon.back.dto.StoreDTO;
 import com.eyecon.back.dto.UserDTO;
 import com.eyecon.back.entity.Store;
@@ -25,25 +26,36 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void join(UserDTO userDTO, StoreDTO storeDTO) {
-        // 1. dto -> entity 변환
-        User user = User.toUser(userDTO);
+    public void join(JoinDTO joinDTO) {
+        // User 엔티티 생성
+        User user = new User();
+        user.setId(joinDTO.getId());
+        user.setEmail(joinDTO.getEmail());
+        user.setPw(joinDTO.getPw());
+        user.setCoin(joinDTO.getCoin());
 
-        // 2. 비밀번호 암호화
+        //비밀번호 암호화
         String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPw(encodedPassword);
-
-        // 3. repository의 save 메서드 호출
+        
+        // User 엔티티 저장
         userRepository.save(user);
-        Store store = Store.toStore(storeDTO);
-//        Store store = Store.toStore()
-//        storeDTO.setEmail(user.getEmail());
-//        storeRepository.save(store);
-        
-//         store.setUser(user.getEmail());
+
+        // Store 엔티티 생성
+        Store store = new Store();
+        store.setId(joinDTO.getId());
+        store.setUser(user);  // User 엔티티 참조 설정
+        store.setStoreName(joinDTO.getStoreName());
+        store.setCategory(joinDTO.getCategory());
+        store.setPlace1(joinDTO.getPlace1());
+        store.setPlace2(joinDTO.getPlace2());
+
+        // Store 엔티티 저장
         storeRepository.save(store);
-        
     }
+
+    
+
+
     
     public boolean checkEmail(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);

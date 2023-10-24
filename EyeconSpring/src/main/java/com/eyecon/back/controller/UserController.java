@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eyecon.back.dto.JoinDTO;
 import com.eyecon.back.dto.StoreDTO;
 import com.eyecon.back.dto.UserDTO;
 import com.eyecon.back.entity.Store;
@@ -26,16 +27,16 @@ public class UserController {
 	private final UserService userService;
 	
     @RequestMapping("/join")
-    public String join(@RequestHeader StoreDTO storeDTO, UserDTO userDTO ) {
+    public String join(@RequestBody JoinDTO joinDTO ) {
         System.out.println("UserController.join");
-        System.out.println("userDTO : " + userDTO);
-        System.out.println("storeDTO : " + storeDTO);
+//        System.out.println("userDTO : " + userDTO);
+//        System.out.println("storeDTO : " + storeDTO);
         
  
         // Store 객체 생성 (service에서 storeDTO를 쓰면 에러나서 그냥 entity 썼음)
         
 
-        userService.join(userDTO, storeDTO);
+        userService.join(joinDTO);
         return "login";
     }
     
