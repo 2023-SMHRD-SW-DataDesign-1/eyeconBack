@@ -10,14 +10,14 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QTokens is a Querydsl query type for Tokens
+ * QToken is a Querydsl query type for Token
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QTokens extends EntityPathBase<Token> {
+public class QToken extends EntityPathBase<Token> {
 
-    private static final long serialVersionUID = 1141901966L;
+    private static final long serialVersionUID = 1560856197L;
 
-    public static final QTokens tokens = new QTokens("tokens");
+    public static final QToken token1 = new QToken("token1");
 
     public final BooleanPath expired = createBoolean("expired");
 
@@ -31,15 +31,15 @@ public class QTokens extends EntityPathBase<Token> {
 
     public final StringPath userName = createString("userName");
 
-    public QTokens(String variable) {
+    public QToken(String variable) {
         super(Token.class, forVariable(variable));
     }
 
-    public QTokens(Path<? extends Token> path) {
+    public QToken(Path<? extends Token> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QTokens(PathMetadata metadata) {
+    public QToken(PathMetadata metadata) {
         super(Token.class, metadata);
     }
 
