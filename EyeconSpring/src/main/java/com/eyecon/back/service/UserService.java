@@ -39,7 +39,7 @@ public class UserService {
 //        storeDTO.setEmail(user.getEmail());
 //        storeRepository.save(store);
         
-        store.setEmail(user.getEmail());
+//         store.setUser(user.getEmail());
         storeRepository.save(store);
         
     }

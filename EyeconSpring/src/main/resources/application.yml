@@ -4,8 +4,8 @@ server:
 #    session:
 #      cookie:
 #        samesite: None
-  #servlet:
-    #context-path: /EyeconSpring 
+  servlet:
+    context-path: /EyeconSpring 
 # database 연동 설정
 spring:
   datasource:
@@ -24,9 +24,9 @@ spring:
         query:
           in_clause_parameter_padding: true
     open-in-view: false
-    show-sql: false
+    show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 
       
 application:
