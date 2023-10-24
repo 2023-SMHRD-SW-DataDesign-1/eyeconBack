@@ -38,7 +38,7 @@ public class AuthController {
             .email(login.email()) 
             .pw(login.pw())
             .build();
-//        userService.findUser(user);
+        userService.findUser(user);
         System.out.println(user.getEmail());
         System.out.println(user.getPw());
         AuthVO authVo = authService.authenticate(user);

@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +38,10 @@ public class UserService {
         user.setCoin(joinDTO.getCoin()+1);
 
         //비밀번호 암호화
+
         String encodedPassword = passwordEncoder.encode(joinDTO.getPw());
         user.setPw(encodedPassword);      
+
         // User 엔티티 저장
         userRepository.save(user);
 
@@ -85,7 +90,32 @@ public class UserService {
         return user.getCoin();
     }
 
+
 	
+	  public void findUser(User user) { 
+		  
+			/*
+			 * System.out.println("asdfasdfdsf"); System.out.println(user.getEmail());
+			 * System.out.println(user.getPw()); String encodedPassword =
+			 * passwordEncoder.encode(user.getPw()); user.setPw(encodedPassword);
+			 * System.out.println(encodedPassword); return
+			 * userRepository.findByEmailAndPw(user.getEmail(),user.getPw()).orElseThrow(()-
+			 * > new UsernameNotFoundException("The user does not exist"));
+			 */
+		  Optional<User> u = Optional.ofNullable(userRepository.findByEmail(user.getEmail()).orElseThrow(()-> new UsernameNotFoundException("The user does not exist")));
+		 
+		  if(u.isPresent()) {
+			  if(!passwordEncoder.matches(user.getPassword(), u.get().getPassword())) {
+				  throw new BadCredentialsException("password error");
+			  }
+			  
+		  }
+		
+		  
+		  
+	  
+	}
+	 	
 
 
 	

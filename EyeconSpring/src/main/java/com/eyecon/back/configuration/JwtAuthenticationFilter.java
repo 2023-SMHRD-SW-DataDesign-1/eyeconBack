@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -47,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-            FilterChain filterChain) throws ServletException, IOException {
+            FilterChain filterChain) throws ServletException, IOException, UsernameNotFoundException {
 		/* final String authHeader = request.getHeader("Authorization"); */
     	// 쿠키에서 accessToken을 가져옵니다.
     	Cookie[] cookies = request.getCookies();   	
@@ -82,21 +83,28 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // SecurityContext에 인증 정보가 없고 사용자 이름이 null이 아닌 경우
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
         	System.out.println("맨위 if문 왔음");
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
-            //boolean isTokenValid = tokenRepository.findByToken(jwt).map(t -> !t.isExpired() && !t.isRevoked()).orElse(false);
-            if (jwtService.isTokenValid(token, userDetails))/* && isTokenValid)*/ {
-            	System.out.println("if문 왔음");
-                UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(userDetails, null,
-                                userDetails.getAuthorities());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-            } else {
-            	// 토큰이 유호하지 않으면 401 에러를 반환
-            	System.out.println("else문 왔음");
-            	response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is expired");
+        	try {
+        		UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
+        		//boolean isTokenValid = tokenRepository.findByToken(jwt).map(t -> !t.isExpired() && !t.isRevoked()).orElse(false);
+        		if (jwtService.isTokenValid(token, userDetails))/* && isTokenValid)*/ {
+        			System.out.println("if문 왔음");
+        			UsernamePasswordAuthenticationToken authToken =
+        					new UsernamePasswordAuthenticationToken(userDetails, null,
+        							userDetails.getAuthorities());
+        			authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        			SecurityContextHolder.getContext().setAuthentication(authToken);
+        		} else {
+        			// 토큰이 유호하지 않으면 401 에러를 반환
+        			System.out.println("else문 왔음");
+        			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is expired");
+        			return;
+        		}
+        	} catch (UsernameNotFoundException e) {
+            	// 사용자가 존재하지 않으면 404 에러 반환
+        		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The user does not exist");
                 return;
             }
+			
         }
         filterChain.doFilter(request, response);
     }
