@@ -41,8 +41,8 @@ public class Store {
 //	@Column(name="email")
 //	private String email;
 
-	@Column(name="storename")
-	private String storename;
+	@Column(name="storeName")
+	private String storeName;
 	
 	@Column(name="category")
 	private String category; //편의점인지 마트인지

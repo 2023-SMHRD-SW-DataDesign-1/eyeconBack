@@ -18,7 +18,7 @@ public class StoreDTO {
 
 	private Long id;
     private String email;
-	private String storename;
+	private String storeName;
 	private String category; //편의점인지 마트인지
 	private String place1;
 	private String place2;
@@ -29,7 +29,7 @@ public class StoreDTO {
     	
     	storeDTO.setId(store.getId());
     	storeDTO.setEmail(user.getEmail());
-    	storeDTO.setStorename(store.getStorename());
+    	storeDTO.setStoreName(store.getStoreName());
     	storeDTO.setCategory(store.getCategory());
     	storeDTO.setPlace1(store.getPlace1());
     	storeDTO.setPlace2(store.getPlace2());
