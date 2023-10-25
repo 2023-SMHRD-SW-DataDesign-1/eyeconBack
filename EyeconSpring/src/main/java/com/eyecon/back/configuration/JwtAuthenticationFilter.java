@@ -59,18 +59,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     	            .filter(c -> c.getName().equals("accessToken"))
     	            .findFirst().map(Cookie::getValue)
     	            .orElse(null);
-    	}else {
-    		
     	}
-		System.out.println("token : "+ token);
-		/* final String jwt; */
+		System.out.println("JwtAuthenticationFilter에서 출력중 token : "+ token);
+		
         String userEmail = null; // username
         
 		if (token == null /* || !token.startsWith("Bearer ") */) {
             filterChain.doFilter(request, response);
             return;
         }
-		/* jwt = token.substring(7); */
+		
 		try {
 		    userEmail = jwtService.extractUsername(token);
 		} catch (io.jsonwebtoken.ExpiredJwtException e) {

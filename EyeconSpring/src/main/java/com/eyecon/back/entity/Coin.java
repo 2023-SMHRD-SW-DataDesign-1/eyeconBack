@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.sql.Time;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -18,17 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Payment {
+public class Coin {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String email;
+	private String coinName;
 	private int price;
-	private int coinId;
-	private int coin;
-	private Date date;
-	private Time time;
-	private String category;
-	private String number;
-	private String finance;
+	private int coinCnt;
 }

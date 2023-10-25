@@ -12,5 +12,7 @@ public interface TokenRepository extends JpaRepository<Token, Long>, TokenReposi
     Optional<Token> findByToken(String token);
     
     List<Token> findByTokenAndUserNameAndRevoked(String refreshToken, String userEmail, boolean revoked);
+
+	List<Token> findAllValidTokenByUserId(String email);
    
 }
