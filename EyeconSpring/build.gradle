@@ -71,8 +71,6 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/io.micrometer/micrometer-core
     implementation group: 'io.micrometer', name: 'micrometer-core', version: '1.11.1'
-
-	
 	
 }
 

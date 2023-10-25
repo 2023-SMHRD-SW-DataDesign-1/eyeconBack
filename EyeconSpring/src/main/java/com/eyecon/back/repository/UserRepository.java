@@ -9,10 +9,10 @@ import com.eyecon.back.entity.User;
 import java.util.List;
 
 
-@Repository
+
 public interface UserRepository extends JpaRepository<User, Long> {
-   public Optional<User> findByEmail(String email); 
-   public Optional<User> findByEmailAndPw(String email, String pw);
+    Optional<User> findByEmail(String email); 
+    Optional<User> findByEmailAndPw(String email, String pw);
    
 
    

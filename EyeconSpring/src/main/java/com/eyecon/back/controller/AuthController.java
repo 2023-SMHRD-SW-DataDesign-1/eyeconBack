@@ -33,7 +33,7 @@ public class AuthController {
 	private final UserService userService;
 
 	@PostMapping("/login")
-	public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest login) {
+	public ResponseEntity<String> authenticate(@RequestBody AuthRequest login) {
         User user = User.builder()
             .email(login.email()) 
             .pw(login.pw())
@@ -61,7 +61,7 @@ public class AuthController {
         return ResponseEntity.ok()
             .header(HttpHeaders.SET_COOKIE, refreshCookie.toString())
             .header(HttpHeaders.SET_COOKIE, accessCookie.toString())
-            .body(null);
+            .body("Exist");
     
 		// authority : 회원가입 , 인가
 		// authentication : 로그인, 인증

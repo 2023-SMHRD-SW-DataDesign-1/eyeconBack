@@ -67,6 +67,7 @@ public class SecurityConfig {
 		.addFilterBefore(jwtautuFilter, UsernamePasswordAuthenticationFilter.class)
 		
 		  		.logout(logoutConfig -> { logoutConfig .logoutUrl("/auth/logout")
+		  		.deleteCookies("JSESSIONID","accessToken", "refreshToken") // 로그아웃 후 해당 쿠키 삭제
 		  		.addLogoutHandler(logoutService)
 		  		.logoutSuccessHandler((request, response, authentication) -> 
 		  			SecurityContextHolder.clearContext()); 

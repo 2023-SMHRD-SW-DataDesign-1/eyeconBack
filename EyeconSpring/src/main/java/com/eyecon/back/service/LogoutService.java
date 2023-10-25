@@ -1,7 +1,9 @@
 package com.eyecon.back.service;
 
+import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,16 +28,43 @@ public class LogoutService implements LogoutHandler {
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) {
-        final String authHeader = request.getHeader("Authorization");
-        final String token;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return;
-        }
-        token = authHeader.substring(7);
+		/*
+		 * final String authHeader = request.getHeader("Authorization"); final String
+		 * token; if (authHeader == null || !authHeader.startsWith("Bearer ")) { return;
+		 * } token = authHeader.substring(7);
+		 */
+    	
+    	Cookie[] cookies = request.getCookies();   	
+    	String token = null;
+    	
+    	if (cookies != null) {
+    	    token = Arrays.stream(cookies)
+    	            .filter(c -> c.getName().equals("refreshToken"))
+    	            .findFirst().map(Cookie::getValue)
+    	            .orElse(null);
+    	}else {
+    		
+    	}
+    	
+    	System.out.println("====== LogoutService =======");
+		System.out.println("refreshToken : "+ token);
+		
         if (!StringUtils.isEmpty(token)) {
             final String userEmail = jwtService.extractUsername(token);
             revokeAllUserTokens(userEmail);
         }
+        Cookie accessTokenCookie = new Cookie("accessToken", null);
+        accessTokenCookie.setMaxAge(0); // 즉시 만료
+        accessTokenCookie.setHttpOnly(true);
+        accessTokenCookie.setPath("/"); // 쿠키 Path 설정
+
+        Cookie refreshTokenCookie = new Cookie("refreshToken", null);
+        refreshTokenCookie.setMaxAge(0); // 즉시 만료
+        refreshTokenCookie.setHttpOnly(true);
+        refreshTokenCookie.setPath("/"); // 쿠키 Path 설정
+
+        response.addCookie(accessTokenCookie);
+        response.addCookie(refreshTokenCookie);
     }
 
     private void revokeAllUserTokens(String username) {
