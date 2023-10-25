@@ -65,6 +65,7 @@ public class FlaskService {
 		//3-2 조회한 상권데이터 상권 엔티티에 저장 -> 아래 4-2가 DTO만 돼서 엔티티에서 dto로 변경 => 에러떠서 그냥 엔티티로 다시 해봄 안되면 그때 고쳐보자!!!
 		Salesarea salesarea = optionSales.get(); //-> 조회된 값이 없을때 에러 떠서 일단 주석 ㄱ 아래 방법은 예외처리를 해준다는 데 두고 봐야될듯..
 //		Salesarea salesarea = optionSales.orElseThrow(NoSuchElementException::new);
+		System.out.println("상권 엔티티 : "+salesarea);
 		
 		//4-1 flask에 데이터를 json으로 보내기 위한 설정
 		HttpHeaders headers = new HttpHeaders();
@@ -73,7 +74,7 @@ public class FlaskService {
 
 		// 4-2
 		// HttpEntity에 데이터와 헤더 설정
-		HttpEntity<SalesareaDTO> entity = new HttpEntity<>(salesareaDTO, headers);
+		HttpEntity<Salesarea> entity = new HttpEntity<>(salesarea, headers);
 		System.out.println("4-2 통과");
 		
 		// 5 flask에 POST 요청 보내기
