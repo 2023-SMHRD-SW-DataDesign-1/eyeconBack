@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eyecon.back.dto.UserDTO;
 import com.eyecon.back.method.TokenToEmail;
 import com.eyecon.back.service.AuthService;
-import com.eyecon.back.service.UserService;
+import com.eyecon.back.service.CoinService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +22,26 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/coin")
 public class CoinController {
 
-	private final UserService userService;
+
+	private final CoinService coinService;
+	
+	
+	// 코인 조회 함수 (비동기?)
+	@RequestMapping("/findCoin")
+	public int findCoin(@CookieValue String accessToken) {
+		
+		System.out.println("CoinController.findCoin");
+		TokenToEmail tokenToEmail = new TokenToEmail();
+		String email=tokenToEmail.getEmailFromToken(accessToken);
+		
+		UserDTO userDTO =new UserDTO();
+		userDTO.setEmail(email);
+        System.out.println("이에일 : " + userDTO.getEmail());
+        int countedCoin = coinService.findCoin(userDTO);
+        
+        
+		return countedCoin;//임시
+	}
 	
 	
 	
@@ -32,7 +51,7 @@ public class CoinController {
 	@RequestMapping("/removeCoin")
 	public int removeCoin(@CookieValue String accessToken) {
 		
-		System.out.println("UserController.removeCoin");
+		System.out.println("CoinController.removeCoin");
 
 		
 		
@@ -44,7 +63,7 @@ public class CoinController {
 		userDTO.setEmail(email);
 		
         System.out.println("이에일 : " + userDTO.getEmail());
-        int updatedCoin = userService.removeCoin(userDTO);
+        int updatedCoin = coinService.removeCoin(userDTO);
 		
 		System.out.println(updatedCoin);
 		
