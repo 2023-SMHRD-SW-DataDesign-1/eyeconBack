@@ -1,5 +1,6 @@
 package com.eyecon.back.controller;
 
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -48,6 +49,15 @@ public class UserController {
         
         
         return userService.checkEmail(userDTO.getEmail());
+    }
+    
+    @PostMapping("/updatePw")
+    public String updatePw (@CookieValue String accessToken, @RequestBody UserDTO user) {
+    	System.out.println("updatePassword : "+ user.getPw());
+    	userService.updatePw(accessToken, user.getPw());
+    	
+    	return "";
+    			
     }
     
 
