@@ -1,0 +1,92 @@
+package com.eyecon.back.service;
+
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.eyecon.back.dto.SalesareaDTO;
+import com.eyecon.back.dto.StoreDTO;
+import com.eyecon.back.entity.Salesarea;
+import com.eyecon.back.entity.Store;
+import com.eyecon.back.repository.SalesareaRepository;
+import com.eyecon.back.repository.StoreRepository;
+import com.eyecon.back.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class FlaskService {
+
+	private final SalesareaRepository salesareaRepository;
+	private final StoreRepository storeRepository;
+	
+	@Transactional
+	public String callData(StoreDTO storeDTO) {
+		System.out.println("=== Flask Service ===");
+		
+		//1-1 이메일로 가게 장소 조회
+		Optional<Store> optionStore  =storeRepository.findByUser_Email(storeDTO.getEmail());
+		System.out.println("1-1 통과");
+		
+		//1-2 조회한 가게 장소 엔티티에 저장
+		Store store= optionStore.get();
+//		System.out.println("store 엔티티 : "+store);
+		System.out.println("1-2 통과");
+		
+		//2-1 엔티티에 저장된 가게 장소 상권dto에 저장 
+		SalesareaDTO salesareaDTO= new SalesareaDTO();
+		salesareaDTO.setPlace(store.getPlace1());
+		System.out.println("salesareaDTO 세일즈DTO"+salesareaDTO);
+		System.out.println("2 통과");
+		
+		// 2-2 위치 정보 () 들어가면 거기부터 지워버리기
+		String place = salesareaDTO.getPlace();
+		int index = place.indexOf("(");
+		if (index > 0) {
+		    // 공백을 제외하고 '(' 앞의 문자열을 가져옵니다.
+		    place = place.substring(0, index).trim();
+		}
+		System.out.println(place);
+		
+		//3-1 상권dto에 저장된 가게장소로 상권데이터 조회
+//		Optional<Salesarea> optionSales= salesareaRepository.findByPlace(salesareaDTO.getPlace());
+		Optional<Salesarea> optionSales= salesareaRepository.findByPlaceContaining(place);
+		System.out.println("optionSales 옵셔널세일즈 : "+optionSales.get());
+		System.out.println("3-1 통과");
+		
+		//3-2 조회한 상권데이터 상권 엔티티에 저장 -> 아래 4-2가 DTO만 돼서 엔티티에서 dto로 변경 => 에러떠서 그냥 엔티티로 다시 해봄 안되면 그때 고쳐보자!!!
+		Salesarea salesarea = optionSales.get(); //-> 조회된 값이 없을때 에러 떠서 일단 주석 ㄱ 아래 방법은 예외처리를 해준다는 데 두고 봐야될듯..
+//		Salesarea salesarea = optionSales.orElseThrow(NoSuchElementException::new);
+		System.out.println("상권 엔티티 : "+salesarea);
+		
+		//4-1 flask에 데이터를 json으로 보내기 위한 설정
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		System.out.println("4-1 통과");
+
+		// 4-2
+		// HttpEntity에 데이터와 헤더 설정
+		HttpEntity<Salesarea> entity = new HttpEntity<>(salesarea, headers);
+		System.out.println("4-2 통과");
+		
+		// 5 flask에 POST 요청 보내기
+		String flaskUrl = "http://localhost:5000/consult";
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.postForObject(flaskUrl, entity, String.class);
+		System.out.println("5 통과");
+		
+		String suc = "플라스크에 요청 시도했음";
+		return suc;
+	}
+	
+	
+	
+}

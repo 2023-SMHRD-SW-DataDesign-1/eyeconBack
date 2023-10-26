@@ -1,8 +1,6 @@
 package com.eyecon.back.entity;
 
-import java.sql.Date;
-import java.sql.Time;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,16 +20,35 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="salesarea")
 public class Salesarea {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name="Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
+	@Column(name="place")	
 	private String place;
+	
+	@Column(name="age")	
 	private String age;
+	
+	@Column(name="sex")	
 	private String sex;
+	
+	@Column(name="storecnt")	
 	private String storecnt;
+	
+	@Column(name="income")	
 	private String income;
+	
+	@Column(name="population")
 	private String population;
+	
+	@Column(name="maxday")
 	private String maxday;
+	
+	@Column(name="category")
 	private String category;
+	
+	
 }
