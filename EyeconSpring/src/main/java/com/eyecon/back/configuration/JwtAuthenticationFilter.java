@@ -52,25 +52,35 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		/* final String authHeader = request.getHeader("Authorization"); */
     	// 쿠키에서 accessToken을 가져옵니다.
     	Cookie[] cookies = request.getCookies();   	
-    	String token = null;
-    	
+    	String accessToken = null;
+    	String refreshToken = null;
     	if (cookies != null) {
-    	    token = Arrays.stream(cookies)
+    		accessToken = Arrays.stream(cookies)
     	            .filter(c -> c.getName().equals("accessToken"))
     	            .findFirst().map(Cookie::getValue)
     	            .orElse(null);
+    		refreshToken = Arrays.stream(cookies)
+    	            .filter(c -> c.getName().equals("refreshToken"))
+    	            .findFirst().map(Cookie::getValue)
+    	            .orElse(null);
+    		
     	}
-		System.out.println("JwtAuthenticationFilter에서 출력중 token : "+ token);
+		System.out.println("JwtAuthenticationFilter에서 출력중 accesstoken : "+ accessToken);
+		System.out.println("JwtAuthenticationFilter에서 출력중 refreshToken : "+ refreshToken);
 		
         String userEmail = null; // username
         
-		if (token == null /* || !token.startsWith("Bearer ") */) {
+        // access + refresh null 이면? 즉 처음 로그인한 상태 
+		if (accessToken == null && refreshToken == null) {
             filterChain.doFilter(request, response);
             return;
+        }else if(accessToken == null && refreshToken != null) {
+        	response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is expired");
+        	return;
         }
 		
 		try {
-		    userEmail = jwtService.extractUsername(token);
+		    userEmail = jwtService.extractUsername(accessToken);
 		} catch (io.jsonwebtoken.ExpiredJwtException e) {
 			System.out.println("catch문 왔음");
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is expired");
@@ -84,7 +94,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         	try {
         		UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
         		//boolean isTokenValid = tokenRepository.findByToken(jwt).map(t -> !t.isExpired() && !t.isRevoked()).orElse(false);
-        		if (jwtService.isTokenValid(token, userDetails))/* && isTokenValid)*/ {
+        		if (jwtService.isTokenValid(accessToken, userDetails))/* && isTokenValid)*/ {
         			System.out.println("if문 왔음");
         			UsernamePasswordAuthenticationToken authToken =
         					new UsernamePasswordAuthenticationToken(userDetails, null,
