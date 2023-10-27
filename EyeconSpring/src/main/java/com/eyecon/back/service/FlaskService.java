@@ -5,16 +5,20 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.eyecon.back.dto.ResultDTO;
 import com.eyecon.back.dto.SalesareaDTO;
 import com.eyecon.back.dto.StoreDTO;
+import com.eyecon.back.entity.Result;
 import com.eyecon.back.entity.Salesarea;
 import com.eyecon.back.entity.Store;
+import com.eyecon.back.repository.ResultRepository;
 import com.eyecon.back.repository.SalesareaRepository;
 import com.eyecon.back.repository.StoreRepository;
 import com.eyecon.back.repository.UserRepository;
@@ -27,6 +31,7 @@ public class FlaskService {
 
 	private final SalesareaRepository salesareaRepository;
 	private final StoreRepository storeRepository;
+	private final ResultRepository resultRepository;
 	
 	@Transactional
 	public String callData(StoreDTO storeDTO) {
@@ -85,6 +90,28 @@ public class FlaskService {
 		
 		String suc = "플라스크에 요청 시도했음";
 		return suc;
+	}
+
+	
+	public void sendImg(ResultDTO resultDTO) {
+		
+		Result result = new Result();
+		result.setBeforeimg(resultDTO.getBeforeimg());
+		
+		
+		//flask에 보내기
+		String content = resultDTO.getBeforeimg();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		HttpEntity<String> entity = new HttpEntity<>(content, headers);
+
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.postForObject("http://localhost:5000/eyeanalysis", entity, String.class);
+		
+		resultRepository.save(result); 
+		
 	}
 	
 	

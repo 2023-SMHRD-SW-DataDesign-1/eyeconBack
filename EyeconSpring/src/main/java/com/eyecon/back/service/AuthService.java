@@ -76,6 +76,8 @@ public class AuthService {
 
     public Optional<String> refreshToken(String refreshToken, HttpServletResponse response) throws IOException {
     	String accessToken = null;
+    	System.out.println("---- 토큰 유효성검사 -----");
+    	System.out.println("**** 주의 깊게 볼것 ******");
         if (!ObjectUtils.isEmpty(refreshToken)) {
             final var userEmail = jwtService.extractUsername(refreshToken);
             if (userEmail != null) {
@@ -83,10 +85,12 @@ public class AuthService {
                 List<Token> validRefreshTokens = tokenRepository.findByTokenAndUserNameAndRevoked(refreshToken, userEmail, false);
                 if (user.isPresent() && validRefreshTokens.size() > 0 && jwtService.isTokenValid(refreshToken, user.get())) {
                     accessToken = jwtService.generateToken(user.get());
-//                    saveToken(user.get(), accessToken);
-                } 
-            }
-        }
+                    saveToken(user.get(), accessToken);
+                   
+                } else { System.out.println("access토큰을 새로발급이 x 토큰 builder에 새로 저장x" );}
+            }else {System.out.println("유저이메일 없을때");}
+        }else {System.out.println("리프레쉬 토큰이 없을때");}
+        System.out.println("====================");
         return accessToken == null ? Optional.empty() : Optional.of(accessToken);
     }
 }

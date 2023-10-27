@@ -21,6 +21,7 @@ public class QSalesarea extends EntityPathBase<Salesarea> {
 
     public final StringPath age = createString("age");
 
+
     public final StringPath category = createString("category");
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
@@ -34,6 +35,7 @@ public class QSalesarea extends EntityPathBase<Salesarea> {
     public final StringPath sex = createString("sex");
 
     public final StringPath storecnt = createString("storecnt");
+
 
     public QSalesarea(String variable) {
         super(Salesarea.class, forVariable(variable));
