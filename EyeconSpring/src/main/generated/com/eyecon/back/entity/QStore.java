@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-
 import com.querydsl.core.types.dsl.PathInits;
 
 
@@ -31,7 +30,7 @@ public class QStore extends EntityPathBase<Store> {
 
     public final StringPath place2 = createString("place2");
 
-    public final StringPath storename = createString("storename");
+    public final StringPath storeName = createString("storeName");
 
     public final QUser user;
 
@@ -54,7 +53,6 @@ public class QStore extends EntityPathBase<Store> {
     public QStore(Class<? extends Store> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.user = inits.isInitialized("user") ? new QUser(forProperty("user")) : null;
-
     }
 
 }
