@@ -83,7 +83,7 @@ public class AuthService {
                 List<Token> validRefreshTokens = tokenRepository.findByTokenAndUserNameAndRevoked(refreshToken, userEmail, false);
                 if (user.isPresent() && validRefreshTokens.size() > 0 && jwtService.isTokenValid(refreshToken, user.get())) {
                     accessToken = jwtService.generateToken(user.get());
-                    saveToken(user.get(), accessToken);
+//                    saveToken(user.get(), accessToken);
                 } 
             }
         }
