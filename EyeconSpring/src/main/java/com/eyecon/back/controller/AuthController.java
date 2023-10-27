@@ -83,6 +83,7 @@ public class AuthController {
                 .maxAge(1800)
                 .domain("localhost")
                 .build();
+       System.out.println("재발급 된 refresh : " + newAccessToken);
         return ResponseEntity.ok()
         	.header(HttpHeaders.SET_COOKIE, accessCookie.toString())
             .body(null);

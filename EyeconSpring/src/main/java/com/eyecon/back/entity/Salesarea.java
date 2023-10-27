@@ -12,12 +12,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Builder
 @Entity
 @Table(name="salesarea")
-@Builder
 public class Salesarea {
 
 	@Id
@@ -34,8 +35,20 @@ public class Salesarea {
 	@Column(name="sex")	
 	private String sex;
 	
+	@Column(name="storecnt")	
+	private String storecnt;
 	
+	@Column(name="income")	
+	private String income;
 	
+	@Column(name="population")
+	private String population;
+	
+	@Column(name="maxday")
+	private String maxday;
+	
+	@Column(name="category")
+	private String category;
 	
 	
 }
