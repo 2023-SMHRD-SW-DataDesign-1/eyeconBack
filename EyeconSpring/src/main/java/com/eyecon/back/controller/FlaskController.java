@@ -45,7 +45,7 @@ public class FlaskController {
 	
 	// 시선분석ai로 가기전 db에 주소 저장 (본 파일은 파이어베이스에 있음)
 	@RequestMapping("/sendImg")
-	public void sendImg(@CookieValue String accessToken, @RequestBody ResultDTO resultDTO ) {
+	public String sendImg(@CookieValue String accessToken, @RequestBody ResultDTO resultDTO ) {
 		
 		System.out.println("FlaskController.sendImg");
 		
@@ -58,7 +58,7 @@ public class FlaskController {
 		resultDTO.setEmail(email);
 		flaskService.sendImg(resultDTO);
 		
-		
+		return "success";
 		
 	}
 	
