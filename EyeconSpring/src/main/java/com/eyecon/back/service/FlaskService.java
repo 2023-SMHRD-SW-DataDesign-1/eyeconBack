@@ -94,23 +94,28 @@ public class FlaskService {
 
 	
 	public void sendImg(ResultDTO resultDTO) {
-		
+		System.out.println("-- flaskService.sendImg -- ");
 		Result result = new Result();
+		System.out.println("resultDTO : "+resultDTO);
+		result.setEmail(resultDTO.getEmail());
 		result.setBeforeimg(resultDTO.getBeforeimg());
 		
 		
+		resultRepository.save(result); 
+		System.out.println("result :"+result);
+		
 		//flask에 보내기
-		String content = resultDTO.getBeforeimg();
+//		String content = resultDTO.getBeforeimg();
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
-		HttpEntity<String> entity = new HttpEntity<>(content, headers);
+		HttpEntity<Result> entity = new HttpEntity<>(result, headers);
 
+		String flaskUrl = "http://localhost:5000/eye";
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForObject("http://localhost:5000/eyeanalysis", entity, String.class);
+		restTemplate.postForObject(flaskUrl, entity, String.class);
 		
-		resultRepository.save(result); 
 		
 	}
 	
