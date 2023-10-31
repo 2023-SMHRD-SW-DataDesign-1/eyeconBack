@@ -53,6 +53,10 @@ public class Store {
 	@Column(name=" place2")
 	private String place2;
 
+	
+	@Column(name = "dong")
+	private String dong;
+	
 	public static Store toStore(StoreDTO storeDTO) {
 		// TODO Auto-generated method stub
 		return null;
