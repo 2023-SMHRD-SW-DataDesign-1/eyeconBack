@@ -22,6 +22,7 @@ public class StoreDTO {
 	private String category; //편의점인지 마트인지
 	private String place1;
 	private String place2;
+	private String dong;
 	
 	
     public static StoreDTO toStoreDTO(Store store, User user) {
@@ -33,6 +34,7 @@ public class StoreDTO {
     	storeDTO.setCategory(store.getCategory());
     	storeDTO.setPlace1(store.getPlace1());
     	storeDTO.setPlace2(store.getPlace2());
+    	storeDTO.setDong(store.getDong());
         return storeDTO;
     }
 

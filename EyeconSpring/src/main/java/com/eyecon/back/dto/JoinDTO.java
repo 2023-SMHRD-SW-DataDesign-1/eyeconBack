@@ -21,6 +21,8 @@ public class JoinDTO {
 	private String category; //편의점인지 마트인지
 	private String place1;
 	private String place2;
+	private String dong;
+	
 	
 	
     public static JoinDTO toJoinDTO(User user, Store store) {
@@ -33,6 +35,10 @@ public class JoinDTO {
     	joinDTO.setStoreName(store.getStoreName());
     	joinDTO.setPw(user.getPw());
     	joinDTO.setCoin(user.getCoin());
+    	joinDTO.setPlace1(store.getPlace1());
+    	joinDTO.setPlace2(store.getPlace2());
+    	joinDTO.setDong(store.getDong());
+    	
         return joinDTO;
     }
 	
