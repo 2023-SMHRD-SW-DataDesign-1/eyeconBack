@@ -19,6 +19,7 @@ import com.eyecon.back.dto.StoreDTO;
 import com.eyecon.back.entity.Result;
 import com.eyecon.back.entity.Salesarea;
 import com.eyecon.back.entity.Store;
+import com.eyecon.back.entity.User;
 import com.eyecon.back.repository.ResultRepository;
 import com.eyecon.back.repository.SalesareaRepository;
 import com.eyecon.back.repository.StoreRepository;
@@ -108,7 +109,7 @@ public class FlaskService {
 	}
 
 	
-	public void sendImg(ResultDTO resultDTO) {
+	public String sendImg(ResultDTO resultDTO) {
 		System.out.println("-- flaskService.sendImg -- ");
 		Result result = new Result();
 		System.out.println("resultDTO : "+resultDTO);
@@ -129,8 +130,24 @@ public class FlaskService {
 
 		String flaskUrl = "http://localhost:5000/eye";
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForObject(flaskUrl, entity, String.class);
+		String response = restTemplate.postForObject(flaskUrl, entity, String.class);
+		return response;
 		
+	}
+
+	// 히트맵이 그려진 이미지 firebase URL을 저장하는 함수
+	@Transactional
+	public void saveAfterImage(ResultDTO resultDTO, String email) {
+		
+		Optional<Result> r = resultRepository.findFirstByEmailOrderByIdDesc(email);
+		
+
+		if (r.isPresent()) {
+			Result resultInfo = r.get();
+			resultInfo.setResultname(resultDTO.getResultname());
+			resultRepository.save(resultInfo);
+			System.out.println("넣어지긴했음");
+		}
 		
 	}
 

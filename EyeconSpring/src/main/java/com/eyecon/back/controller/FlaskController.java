@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,9 +59,20 @@ public class FlaskController {
 		
 		
 		resultDTO.setEmail(email);
-		flaskService.sendImg(resultDTO);
 		
-		return "success";
+		
+		return flaskService.sendImg(resultDTO);
+		
+	}
+	
+	// 히트맵이 그려진 이미지 firebase URL을 저장하는 함수
+	@PostMapping("/saveAfterImage")
+	public void saveAfterImage(@CookieValue String accessToken, @RequestBody ResultDTO resultDTO) {
+		System.out.println("resulturl : " + resultDTO.getResultname());
+		TokenToEmail tokenToEmail = new TokenToEmail();
+		String email=tokenToEmail.getEmailFromToken(accessToken);
+		
+		flaskService.saveAfterImage(resultDTO, email);
 		
 	}
 	
