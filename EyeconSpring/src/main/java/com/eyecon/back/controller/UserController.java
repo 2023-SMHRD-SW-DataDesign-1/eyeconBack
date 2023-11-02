@@ -32,8 +32,8 @@ public class UserController {
         System.out.println("UserController.join");
 //        System.out.println("userDTO : " + userDTO);
 //        System.out.println("storeDTO : " + storeDTO);
-        
- 
+
+
         // Store 객체 생성 (service에서 storeDTO를 쓰면 에러나서 그냥 entity 썼음)
         
 

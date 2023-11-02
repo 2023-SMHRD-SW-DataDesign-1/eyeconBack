@@ -37,7 +37,7 @@ public class Store {
 	@ManyToOne
 	@JoinColumn(name="email", referencedColumnName = "email")
 	private User user;
-//	
+
 //	@Column(name="email")
 //	private String email;
 
@@ -48,7 +48,7 @@ public class Store {
 	private String category; //편의점인지 마트인지
 
 	@Column(name=" place1")
-	private String place1;
+	private String place1;	
 	
 	@Column(name=" place2")
 	private String place2;
@@ -57,8 +57,6 @@ public class Store {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-
 	
 	
 	
