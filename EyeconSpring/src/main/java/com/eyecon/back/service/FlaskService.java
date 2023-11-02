@@ -150,6 +150,23 @@ public class FlaskService {
 		}
 		
 	}
+
+	//
+	public List printImg(ResultDTO resultDTO) {
+		System.out.println("resultService.printImg");
+		Result result = new Result();
+		
+		result.setEmail(resultDTO.getEmail());
+		
+		List<Result> resultList = resultRepository.findByEmailOrderByIdDesc(result.getEmail());
+		System.out.println("이미지출력 리스트[0] : "+ resultList.get(0));
+		Result resultOne = resultList.get(0);
+		
+//		return resultOne; // 마지막 업로드 이미지들만 보냄
+		return resultList;
+	}
+	
+	
 	
 	
 	
