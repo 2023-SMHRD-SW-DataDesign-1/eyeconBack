@@ -1,5 +1,7 @@
 package com.eyecon.back.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,6 +63,28 @@ public class FlaskController {
 		return "success";
 		
 	}
+	
+	// 결과물 출력 메소드
+	@RequestMapping("/printImg")
+	public List printImg(@CookieValue String accessToken) {
+		
+		System.out.println("FlaskController.printImg");
+		
+		//토큰에서 이메일 추출
+		ResultDTO resultDTO = new ResultDTO();
+		TokenToEmail tokenToEmail = new TokenToEmail();
+		String email=tokenToEmail.getEmailFromToken(accessToken);
+		System.out.println("이메일 :"+email);
+		
+		resultDTO.setEmail(email);
+//		Result result = flaskService.printImg(resultDTO); // 가장 최근 이미지들만 부를때
+//		System.out.println("result : "+ result);
+		
+		List<Result> result =flaskService.printImg(resultDTO); 
+		
+		return result;
+	}
+	
 	
 	
 	
