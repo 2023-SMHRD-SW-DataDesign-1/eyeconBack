@@ -1,5 +1,6 @@
 package com.eyecon.back.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -77,6 +78,12 @@ public class PaymentService {
 		User user = userRepository.findByEmail(userEmail).get();
 		user.setCoin(user.getCoin()+c.getCoinCnt());
 		userRepository.save(user);
+		
+	}
+
+	public List<com.eyecon.back.entity.Payment> selectAllPayment(String email) {
+		return paymentRepository.findByEmail(email);
+		
 		
 	}
 

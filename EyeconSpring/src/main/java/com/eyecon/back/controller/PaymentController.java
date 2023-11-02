@@ -2,6 +2,7 @@ package com.eyecon.back.controller;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eyecon.back.dto.PaymentInfo;
 import com.eyecon.back.dto.UserDTO;
+import com.eyecon.back.method.TokenToEmail;
 import com.eyecon.back.service.PaymentService;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -71,6 +74,18 @@ public class PaymentController {
 		paymentService.verifyIamportService(irsp, paymentInfo, accessToken);
 
 		return irsp;
+	}
+	
+	// 결제 내역 페이지
+	@GetMapping("/")
+	public List<com.eyecon.back.entity.Payment> selectAllPayment(@CookieValue String accessToken) {
+		
+		TokenToEmail tokenToEmail = new TokenToEmail();
+		String email = tokenToEmail.getEmailFromToken(accessToken);
+		
+		return paymentService.selectAllPayment(email);
+		
+		
 	}
 
 }
