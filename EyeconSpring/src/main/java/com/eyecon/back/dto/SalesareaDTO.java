@@ -4,6 +4,8 @@ package com.eyecon.back.dto;
 
 
 
+import javax.persistence.Column;
+
 import com.eyecon.back.entity.Salesarea;
 import com.eyecon.back.entity.Store;
 import com.eyecon.back.entity.User;
@@ -21,6 +23,13 @@ public class SalesareaDTO {
 	private String place;
 	private String age;
 	private String sex;
+	private String storecnt;
+	private String income;
+	private String population;
+	private String maxday;
+	private String category;
+	private String doro;
+	private String dong;
 	
 	
     public static SalesareaDTO toSalesareaDTO(Salesarea salesarea, Store store) {
@@ -31,6 +40,14 @@ public class SalesareaDTO {
     	salesareaDTO.setPlace(salesarea.getPlace());
     	salesareaDTO.setAge(salesarea.getAge());
     	salesareaDTO.setSex(salesarea.getSex());
+    	salesareaDTO.setStorecnt(salesarea.getStorecnt());
+    	salesareaDTO.setIncome(salesarea.getIncome());
+    	salesareaDTO.setPopulation(salesarea.getPopulation());
+    	salesareaDTO.setMaxday(salesarea.getMaxday());
+    	salesareaDTO.setCategory(salesarea.getCategory());
+    	salesareaDTO.setDong(store.getDong());
+    	salesareaDTO.setDoro(store.getPlace1());
+    	
 
         return salesareaDTO;
     }

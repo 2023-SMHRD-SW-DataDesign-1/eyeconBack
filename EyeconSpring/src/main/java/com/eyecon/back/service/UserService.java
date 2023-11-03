@@ -55,6 +55,7 @@ public class UserService {
 		store.setCategory(joinDTO.getCategory());
 		store.setPlace1(joinDTO.getPlace1());
 		store.setPlace2(joinDTO.getPlace2());
+		store.setDong(joinDTO.getDong());
 
 		// Store 엔티티 저장
 		storeRepository.save(store);

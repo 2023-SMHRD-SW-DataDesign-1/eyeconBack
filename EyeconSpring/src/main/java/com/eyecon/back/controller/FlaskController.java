@@ -1,7 +1,10 @@
 package com.eyecon.back.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,7 +48,7 @@ public class FlaskController {
 	
 	// 시선분석ai로 가기전 db에 주소 저장 (본 파일은 파이어베이스에 있음)
 	@RequestMapping("/sendImg")
-	public void sendImg(@CookieValue String accessToken, @RequestBody ResultDTO resultDTO ) {
+	public String sendImg(@CookieValue String accessToken, @RequestBody ResultDTO resultDTO ) {
 		
 		System.out.println("FlaskController.sendImg");
 		
@@ -56,11 +59,44 @@ public class FlaskController {
 		
 		
 		resultDTO.setEmail(email);
-		flaskService.sendImg(resultDTO);
 		
 		
+		return flaskService.sendImg(resultDTO);
 		
 	}
+	
+	// 히트맵이 그려진 이미지 firebase URL을 저장하는 함수
+	@PostMapping("/saveAfterImage")
+	public void saveAfterImage(@CookieValue String accessToken, @RequestBody ResultDTO resultDTO) {
+		System.out.println("resulturl : " + resultDTO.getResultname());
+		TokenToEmail tokenToEmail = new TokenToEmail();
+		String email=tokenToEmail.getEmailFromToken(accessToken);
+		
+		flaskService.saveAfterImage(resultDTO, email);
+		
+	}
+	
+	// 결과물 출력 메소드
+	@RequestMapping("/printImg")
+	public List printImg(@CookieValue String accessToken) {
+		
+		System.out.println("FlaskController.printImg");
+		
+		//토큰에서 이메일 추출
+		ResultDTO resultDTO = new ResultDTO();
+		TokenToEmail tokenToEmail = new TokenToEmail();
+		String email=tokenToEmail.getEmailFromToken(accessToken);
+		System.out.println("이메일 :"+email);
+		
+		resultDTO.setEmail(email);
+//		Result result = flaskService.printImg(resultDTO); // 가장 최근 이미지들만 부를때
+//		System.out.println("result : "+ result);
+		
+		List<Result> result =flaskService.printImg(resultDTO); 
+		
+		return result;
+	}
+	
 	
 	
 	

@@ -30,6 +30,7 @@ public class UserController {
     @RequestMapping("/join")
     public String join(@RequestBody JoinDTO joinDTO ) {
         System.out.println("UserController.join");
+        System.out.println("joinDTO : "+joinDTO);
 //        System.out.println("userDTO : " + userDTO);
 //        System.out.println("storeDTO : " + storeDTO);
 
