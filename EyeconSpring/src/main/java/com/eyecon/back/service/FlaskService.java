@@ -41,7 +41,7 @@ public class FlaskService {
 		System.out.println("=== Flask Service ===");
 		
 		//1-1 이메일로 가게 장소 조회
-		Optional<Store> optionStore  =storeRepository.findByUser_Email(storeDTO.getEmail());
+		Optional<Store> optionStore  =storeRepository.findByEmail(storeDTO.getEmail());
 		System.out.println("1-1 통과");
 		
 		//1-2 조회한 가게 장소 엔티티에 저장

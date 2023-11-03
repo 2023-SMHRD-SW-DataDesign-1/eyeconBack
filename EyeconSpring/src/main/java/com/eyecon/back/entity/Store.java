@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -34,12 +35,13 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="email", referencedColumnName = "email")
-	private User user;
+//	@ManyToOne
+//	@JoinColumn(name="email", referencedColumnName = "email")
+//    @ToString.Exclude
+//	private User user;
 
-//	@Column(name="email")
-//	private String email;
+	@Column(name="email")
+	private String email;
 
 	@Column(name="storeName")
 	private String storeName;

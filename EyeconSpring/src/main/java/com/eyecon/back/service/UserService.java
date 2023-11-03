@@ -50,7 +50,7 @@ public class UserService {
 		// Store 엔티티 생성
 		Store store = new Store();
 		store.setId(joinDTO.getId());
-		store.setUser(user); // User 엔티티 참조 설정
+		store.setEmail(joinDTO.getEmail()); // User 엔티티 참조 설정
 		store.setStoreName(joinDTO.getStoreName());
 		store.setCategory(joinDTO.getCategory());
 		store.setPlace1(joinDTO.getPlace1());

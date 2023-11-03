@@ -25,11 +25,11 @@ public class StoreDTO {
 	private String dong;
 	
 	
-    public static StoreDTO toStoreDTO(Store store, User user) {
+    public static StoreDTO toStoreDTO(Store store) {
     	StoreDTO storeDTO = new StoreDTO();
     	
     	storeDTO.setId(store.getId());
-    	storeDTO.setEmail(user.getEmail());
+    	storeDTO.setEmail(store.getEmail());
     	storeDTO.setStoreName(store.getStoreName());
     	storeDTO.setCategory(store.getCategory());
     	storeDTO.setPlace1(store.getPlace1());
