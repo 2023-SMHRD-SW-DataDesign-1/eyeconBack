@@ -32,7 +32,7 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="berforeimg")
+	@Column(name="beforeimg")
 	private String beforeimg; // 본래 이미지
 	
 	@Column(name="email")

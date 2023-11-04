@@ -59,8 +59,6 @@ public class AuthService {
                 t.setRevoked(true);
                 tokenRepository.save(t);
             });
-        }else {
-        	
         }
     }
     private void saveToken (User user, String jwtToken) {
