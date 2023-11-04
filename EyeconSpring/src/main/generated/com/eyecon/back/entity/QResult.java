@@ -35,6 +35,8 @@ public class QResult extends EntityPathBase<Result> {
 
     public final StringPath route = createString("route");
 
+    public final StringPath storeName = createString("storeName");
+
     public final TimePath<java.sql.Time> time = createTime("time", java.sql.Time.class);
 
     public QResult(String variable) {
