@@ -57,5 +57,8 @@ public class Result {
 	@Column(name="time")
 	private Time time;
 	
+	@Column(name="storeName")
+	private String storeName;
+	
 	
 }

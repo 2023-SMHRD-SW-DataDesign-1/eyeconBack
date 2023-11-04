@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +24,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.eyecon.back.dto.UserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -68,8 +72,10 @@ public class User implements UserDetails {
 	@Column(name="date")
 	private LocalDateTime date;
 	
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Store> store =new ArrayList<>();
+//	@JsonIgnore
+//	@JsonInclude(Include.NON_NULL)
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Store> store =new ArrayList<>();
 	
     public static User toUser(UserDTO userDTO) {
     	User user = new User();

@@ -41,7 +41,7 @@ public class FlaskService {
 		System.out.println("=== Flask Service ===");
 		
 		//1-1 이메일로 가게 장소 조회
-		Optional<Store> optionStore  =storeRepository.findByUser_Email(storeDTO.getEmail());
+		Optional<Store> optionStore  =storeRepository.findByEmail(storeDTO.getEmail());
 		System.out.println("1-1 통과");
 		
 		//1-2 조회한 가게 장소 엔티티에 저장
@@ -115,7 +115,7 @@ public class FlaskService {
 		System.out.println("resultDTO : "+resultDTO);
 		result.setEmail(resultDTO.getEmail());
 		result.setBeforeimg(resultDTO.getBeforeimg());
-		
+		result.setStoreName(resultDTO.getStoreName());
 		
 		resultRepository.save(result); 
 		System.out.println("result :"+result);
@@ -160,7 +160,10 @@ public class FlaskService {
 		
 		List<Result> resultList = resultRepository.findByEmailOrderByIdDesc(result.getEmail());
 		System.out.println("이미지출력 리스트[0] : "+ resultList.get(0));
+		System.out.println("이미지출력 리스트[0] : "+ resultList.get(1));
+		System.out.println("이미지출력 리스트[0] : "+ resultList.get(2));
 		Result resultOne = resultList.get(0);
+
 		
 //		return resultOne; // 마지막 업로드 이미지들만 보냄
 		return resultList;

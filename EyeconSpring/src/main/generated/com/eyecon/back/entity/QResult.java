@@ -27,13 +27,15 @@ public class QResult extends EntityPathBase<Result> {
 
     public final StringPath hitmap = createString("hitmap");
 
-    public final NumberPath<Integer> id = createNumber("id", Integer.class);
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath placementimg = createString("placementimg");
 
     public final StringPath resultname = createString("resultname");
 
     public final StringPath route = createString("route");
+
+    public final StringPath storeName = createString("storeName");
 
     public final TimePath<java.sql.Time> time = createTime("time", java.sql.Time.class);
 
