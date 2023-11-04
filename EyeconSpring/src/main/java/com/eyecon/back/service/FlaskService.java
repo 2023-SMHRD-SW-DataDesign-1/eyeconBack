@@ -144,9 +144,9 @@ public class FlaskService {
 
 		if (r.isPresent()) {
 			Result resultInfo = r.get();
-			resultInfo.setResultname(resultDTO.getResultname());
+			resultInfo.setHitmap(resultDTO.getHitmap());
 			resultRepository.save(resultInfo);
-			System.out.println("넣어지긴했음");
+			
 		}
 		
 	}

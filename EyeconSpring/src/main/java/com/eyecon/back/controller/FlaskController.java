@@ -68,7 +68,7 @@ public class FlaskController {
 	// 히트맵이 그려진 이미지 firebase URL을 저장하는 함수
 	@PostMapping("/saveAfterImage")
 	public void saveAfterImage(@CookieValue String accessToken, @RequestBody ResultDTO resultDTO) {
-		System.out.println("resulturl : " + resultDTO.getResultname());
+		System.out.println("resulturl : " + resultDTO.getHitmap());
 		TokenToEmail tokenToEmail = new TokenToEmail();
 		String email=tokenToEmail.getEmailFromToken(accessToken);
 		
