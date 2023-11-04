@@ -115,7 +115,7 @@ public class FlaskService {
 		System.out.println("resultDTO : "+resultDTO);
 		result.setEmail(resultDTO.getEmail());
 		result.setBeforeimg(resultDTO.getBeforeimg());
-		
+		result.setStoreName(resultDTO.getStoreName());
 		
 		resultRepository.save(result); 
 		System.out.println("result :"+result);
@@ -160,7 +160,10 @@ public class FlaskService {
 		
 		List<Result> resultList = resultRepository.findByEmailOrderByIdDesc(result.getEmail());
 		System.out.println("이미지출력 리스트[0] : "+ resultList.get(0));
+		System.out.println("이미지출력 리스트[0] : "+ resultList.get(1));
+		System.out.println("이미지출력 리스트[0] : "+ resultList.get(2));
 		Result resultOne = resultList.get(0);
+
 		
 //		return resultOne; // 마지막 업로드 이미지들만 보냄
 		return resultList;

@@ -37,6 +37,8 @@ public class ResultDTO {
 	
 	private Time time;
 	
+	private String storeName;
+	
 	
 	
 	   public static ResultDTO toResultDTO(Result result) {
@@ -48,6 +50,7 @@ public class ResultDTO {
 		   resultDTO.setPlacementimg(result.getPlacementimg());
 		   resultDTO.setResultname(result.getResultname());
 		   resultDTO.setRoute(result.getRoute());
+		   resultDTO.setStoreName(result.getStoreName());
 
 	        return resultDTO;
 	    }
