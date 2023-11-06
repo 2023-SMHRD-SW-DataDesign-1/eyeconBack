@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,7 +34,7 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="berforeimg")
+	@Column(name="beforeimg")
 	private String beforeimg; // 본래 이미지
 	
 	@Column(name="email")
@@ -59,6 +61,22 @@ public class Result {
 	
 	@Column(name="storeName")
 	private String storeName;
+	
+	
+	
+	
+    @PrePersist
+    public void prePersist() {
+        this.date = new Date();
+        this.time = new Time(System.currentTimeMillis());
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.date = new Date();
+        this.time = new Time(System.currentTimeMillis());
+    }
+	
 	
 	
 }
