@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/store")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins ={"http://localhost:3000","http://52.79.199.84:3000"})
 @RequiredArgsConstructor
 public class StoreController {
 
