@@ -20,7 +20,7 @@ import com.eyecon.back.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin(origins ={"http://localhost:3000/", "http://localhost:5000/","http://52.79.199.84:3000","http://52.79.199.84:5000"}, allowCredentials = "true")
+@CrossOrigin(origins ={"http://localhost:3000/", "http://localhost:5000/","http://13.124.30.27:3000","http://13.124.30.27:5000"}, allowCredentials = "true")
 @RequiredArgsConstructor
 @RequestMapping("/flask")
 public class FlaskController {

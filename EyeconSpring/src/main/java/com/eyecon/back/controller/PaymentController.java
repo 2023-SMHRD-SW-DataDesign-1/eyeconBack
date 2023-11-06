@@ -28,7 +28,7 @@ import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000","http://52.79.199.84:3000"})
+@CrossOrigin(origins = {"http://localhost:3000","http://13.124.30.27:3000"})
 @RequestMapping("/verify")
 public class PaymentController {
 	// portone key

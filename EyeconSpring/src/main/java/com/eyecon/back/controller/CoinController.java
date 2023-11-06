@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000","http://52.79.199.84:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000","http://13.124.30.27:3000"}, allowCredentials = "true")
 @RequestMapping("/coin")
 public class CoinController {
 
