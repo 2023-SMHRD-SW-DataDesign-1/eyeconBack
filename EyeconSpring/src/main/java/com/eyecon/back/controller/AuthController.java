@@ -42,7 +42,8 @@ public class AuthController {
         AuthVO authVo = authService.authenticate(user);
         ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", authVo.refreshToken())
             .httpOnly(true)
-//            .secure(true)
+            .sameSite("None")
+            .secure(true)
             .path("/")
             .maxAge(604800)
             .domain("localhost")
@@ -50,7 +51,8 @@ public class AuthController {
             .build();
         ResponseCookie accessCookie = ResponseCookie.from("accessToken", authVo.accessToken())
                 .httpOnly(true)
-//                .secure(true)
+                .sameSite("None")
+                .secure(true)
                 .path("/")
                 .maxAge(1800)
                 .domain("localhost")
@@ -78,7 +80,8 @@ public class AuthController {
         } 
         ResponseCookie accessCookie = ResponseCookie.from("accessToken", newAccessToken)
                 .httpOnly(true)
-//                .secure(true)
+                .sameSite("None")
+                .secure(true)
                 .path("/")
                 .maxAge(1800)
                 .domain("localhost")
