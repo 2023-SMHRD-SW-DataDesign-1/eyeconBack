@@ -54,6 +54,7 @@ public class LogoutService implements LogoutHandler {
             revokeAllUserTokens(userEmail);
         }
         Cookie accessTokenCookie = new Cookie("accessToken", null);
+        
         accessTokenCookie.setDomain("3.36.133.196");
         accessTokenCookie.setSecure(true);
         accessTokenCookie.setMaxAge(0); // 즉시 만료
