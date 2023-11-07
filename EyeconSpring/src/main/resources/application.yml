@@ -2,6 +2,8 @@ server:
   port: 8023
   servlet:
     context-path: /EyeconSpring 
+  security:
+    require-ssl:true
   ssl:
     key-store-password: 1234
     key-store: classpath:keystore.p12
