@@ -54,11 +54,15 @@ public class LogoutService implements LogoutHandler {
             revokeAllUserTokens(userEmail);
         }
         Cookie accessTokenCookie = new Cookie("accessToken", null);
+        accessTokenCookie.setDomain("3.36.133.196");
+        accessTokenCookie.setSecure(true);
         accessTokenCookie.setMaxAge(0); // 즉시 만료
         accessTokenCookie.setHttpOnly(true);
         accessTokenCookie.setPath("/"); // 쿠키 Path 설정
 
         Cookie refreshTokenCookie = new Cookie("refreshToken", null);
+        refreshTokenCookie.setDomain("3.36.133.196");
+        refreshTokenCookie.setSecure(true);
         refreshTokenCookie.setMaxAge(0); // 즉시 만료
         refreshTokenCookie.setHttpOnly(true);
         refreshTokenCookie.setPath("/"); // 쿠키 Path 설정
