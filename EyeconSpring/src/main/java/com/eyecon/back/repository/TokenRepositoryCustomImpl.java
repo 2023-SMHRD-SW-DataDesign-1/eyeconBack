@@ -1,6 +1,7 @@
 package com.eyecon.back.repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.eyecon.back.entity.QToken;
 import com.eyecon.back.entity.Token;
@@ -33,7 +34,7 @@ public class TokenRepositoryCustomImpl implements TokenRepositoryCustom {
 		  .id(tuple.get(t.id)) .token(tuple.get(t.token))
 		  .tokenType(tuple.get(t.tokenType)) .expired(tuple.get(t.expired))
 		  .revoked(tuple.get(t.revoked)) .userName(tuple.get(t.userName)) .build()
-		  ).toList();
+		  ).collect(Collectors.toList());
 		 
 		
 		
