@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000","http://13.124.30.27:3000","https://13.124.30.27:3000","https://eyecon.site"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000","http://3.36.133.196:3000","https://3.36.133.196:3000","https://eyecon.site"}, allowCredentials = "true")
 @RequestMapping("/auth")
 public class AuthController {
 	private final AuthService authService;
@@ -47,7 +47,7 @@ public class AuthController {
             .path("/")
             .maxAge(604800)
             .domain("localhost")
-            .domain("13.124.30.27")
+            .domain("3.36.133.196")
             .build();
         ResponseCookie accessCookie = ResponseCookie.from("accessToken", authVo.accessToken())
                 .httpOnly(true)
@@ -56,7 +56,7 @@ public class AuthController {
                 .path("/")
                 .maxAge(1800)
                 .domain("localhost")
-                .domain("13.124.30.27")
+                .domain("3.36.133.196")
                 .build();
         System.out.println("refresh 발급 : " +refreshCookie.toString());
         System.out.println("access 발급 : " +accessCookie.toString());
@@ -85,7 +85,7 @@ public class AuthController {
                 .path("/")
                 .maxAge(1800)
                 .domain("localhost")
-                .domain("13.124.30.27")
+                .domain("3.36.133.196")
                 .build();
        System.out.println("재발급 된 refresh : " + newAccessToken);
         return ResponseEntity.ok()

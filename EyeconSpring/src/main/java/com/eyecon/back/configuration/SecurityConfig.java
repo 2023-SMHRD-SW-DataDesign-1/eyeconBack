@@ -83,7 +83,7 @@ public class SecurityConfig {
 	  @Bean CorsConfigurationSource corsConfigurationSource() { CorsConfiguration
 	  configuration = new CorsConfiguration();
 	  configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-	  configuration.setAllowedOrigins(List.of("https://13.124.30.27:3000"));
+	  configuration.setAllowedOrigins(List.of("https://3.36.133.196:3000"));
 	  configuration.setAllowedOrigins(List.of("https://eyecon.site:3000"));
 	  configuration.setAllowedOrigins(List.of("https://eyecon.site"));
 	  configuration.setAllowedMethods(List.of("GET", "POST"));

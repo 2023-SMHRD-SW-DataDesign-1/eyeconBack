@@ -100,7 +100,7 @@ public class FlaskService {
 		
 		// 5 flask에 POST 요청 보내기
 //		String flaskUrl = "http://localhost:5000/consult";
-		String flaskUrl = "http://13.124.30.27:5000/consult";
+		String flaskUrl = "http://3.36.133.196:5000/consult";
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.postForObject(flaskUrl, entity, String.class);
 		System.out.println("5 통과");
@@ -130,7 +130,7 @@ public class FlaskService {
 		HttpEntity<Result> entity = new HttpEntity<>(result, headers);
 
 //		String flaskUrl = "http://localhost:5000/eye";
-		String flaskUrl = "http://13.124.30.27:5000/eye";
+		String flaskUrl = "http://3.36.133.196:5000/eye";
 		RestTemplate restTemplate = new RestTemplate();
 		String response = restTemplate.postForObject(flaskUrl, entity, String.class);
 		return response;
