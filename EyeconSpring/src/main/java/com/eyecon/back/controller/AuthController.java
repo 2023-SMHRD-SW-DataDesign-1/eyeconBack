@@ -46,7 +46,6 @@ public class AuthController {
             .secure(true)
             .path("/")
             .maxAge(604800)
-            .domain("localhost")
             .domain("3.36.133.196")
             .build();
         ResponseCookie accessCookie = ResponseCookie.from("accessToken", authVo.accessToken())
@@ -55,7 +54,6 @@ public class AuthController {
                 .secure(true)
                 .path("/")
                 .maxAge(1800)
-                .domain("localhost")
                 .domain("3.36.133.196")
                 .build();
         System.out.println("refresh 발급 : " +refreshCookie.toString());
@@ -84,7 +82,6 @@ public class AuthController {
                 .secure(true)
                 .path("/")
                 .maxAge(1800)
-                .domain("localhost")
                 .domain("3.36.133.196")
                 .build();
        System.out.println("재발급 된 refresh : " + newAccessToken);
