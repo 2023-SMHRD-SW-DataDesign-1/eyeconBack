@@ -71,7 +71,7 @@ public class FlaskService {
 		if(index>0) {
 			dong=dong.substring(0,index).trim();
 		}
-		index = dong.indexOf("북구");
+		index = dong.indexOf("구 ");
 		if(index > 0) {
 		    dong = dong.substring(index).trim();
 		}
