@@ -1,5 +1,6 @@
 package com.eyecon.back.configuration;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -82,13 +83,22 @@ public class SecurityConfig {
 	
 	  @Bean CorsConfigurationSource corsConfigurationSource() { CorsConfiguration
 	  configuration = new CorsConfiguration();
-	  configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-	  configuration.setAllowedOrigins(List.of("http://3.36.133.196:3000"));
-	  configuration.setAllowedOrigins(List.of("https://3.36.133.196:3000"));
-	  configuration.setAllowedOrigins(List.of("https://eyecon.site:3000"));
-	  configuration.setAllowedOrigins(List.of("http://eyecon.site:3000"));
-	  configuration.setAllowedOrigins(List.of("https://eyecon.site"));
-	  configuration.setAllowedOrigins(List.of("http://eyecon.site"));
+	  configuration.setAllowedOrigins(Arrays.asList(
+		        "http://localhost:3000",
+		        "http://3.36.133.196:3000",
+		        "https://3.36.133.196:3000",
+		        "https://eyecon.site:3000",
+		        "http://eyecon.site:3000",
+		        "https://eyecon.site",
+		        "http://eyecon.site"
+		    ));
+//	  configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+//	  configuration.setAllowedOrigins(List.of("http://3.36.133.196:3000"));
+//	  configuration.setAllowedOrigins(List.of("https://3.36.133.196:3000"));
+//	  configuration.setAllowedOrigins(List.of("https://eyecon.site:3000"));
+//	  configuration.setAllowedOrigins(List.of("http://eyecon.site:3000"));
+//	  configuration.setAllowedOrigins(List.of("https://eyecon.site"));
+//	  configuration.setAllowedOrigins(List.of("http://eyecon.site"));
 	  configuration.setAllowedMethods(List.of("GET", "POST"));
 	  configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 	  configuration.setAllowCredentials(true); UrlBasedCorsConfigurationSource
