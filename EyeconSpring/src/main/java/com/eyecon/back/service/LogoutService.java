@@ -55,14 +55,14 @@ public class LogoutService implements LogoutHandler {
         }
         Cookie accessTokenCookie = new Cookie("accessToken", null);
         
-        accessTokenCookie.setDomain("3.36.133.196");
+        accessTokenCookie.setDomain("43.203.38.24");
         accessTokenCookie.setSecure(true);
         accessTokenCookie.setMaxAge(0); // 즉시 만료
         accessTokenCookie.setHttpOnly(true);
         accessTokenCookie.setPath("/"); // 쿠키 Path 설정
 
         Cookie refreshTokenCookie = new Cookie("refreshToken", null);
-        refreshTokenCookie.setDomain("3.36.133.196");
+        refreshTokenCookie.setDomain("43.203.38.24");
         refreshTokenCookie.setSecure(true);
         refreshTokenCookie.setMaxAge(0); // 즉시 만료
         refreshTokenCookie.setHttpOnly(true);
