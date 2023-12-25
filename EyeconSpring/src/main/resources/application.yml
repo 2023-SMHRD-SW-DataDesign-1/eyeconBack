@@ -18,7 +18,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://database-1.cjmy4oq0sxpj.ap-northeast-2.rds.amazonaws.com:3306/test_db
     username: database-1
-    password: !asdf1234
+    password: '!asdf1234'
   mvc:
     static-path-pattern: /static/**
   jpa:
