@@ -46,7 +46,7 @@ public class AuthController {
             .secure(true)
             .path("/")
             .maxAge(604800)
-            .domain("3.36.133.196")
+            .domain("43.203.38.24")
             .build();
         ResponseCookie accessCookie = ResponseCookie.from("accessToken", authVo.accessToken())
                 .httpOnly(true)
@@ -54,7 +54,7 @@ public class AuthController {
                 .secure(true)
                 .path("/")
                 .maxAge(1800)
-                .domain("3.36.133.196")
+                .domain("43.203.38.24")
                 .build();
         System.out.println("refresh 발급 : " +refreshCookie.toString());
         System.out.println("access 발급 : " +accessCookie.toString());
@@ -82,7 +82,7 @@ public class AuthController {
                 .secure(true)
                 .path("/")
                 .maxAge(1800)
-                .domain("3.36.133.196")
+                .domain("43.203.38.24")
                 .build();
        System.out.println("재발급 된 refresh : " + newAccessToken);
         return ResponseEntity.ok()
