@@ -85,8 +85,8 @@ public class SecurityConfig {
 	  configuration = new CorsConfiguration();
 	  configuration.setAllowedOrigins(Arrays.asList(
 		        "http://localhost:3000",
-		        "http://3.36.133.196:3000",
-		        "https://3.36.133.196:3000",
+		        "http://43.203.38.24:3000",
+		        "https://43.203.38.24:3000",
 		        "https://eyecon.site:3000",
 		        "http://eyecon.site:3000",
 		        "https://eyecon.site",
