@@ -16,9 +16,9 @@ security:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://project-db-campus.smhrd.com:3307/eyecon01
-    username: eyecon01
-    password: eyecon01
+    url: jdbc:mysql://database-1.cjmy4oq0sxpj.ap-northeast-2.rds.amazonaws.com:3306/database-1
+    username: root
+    password: 12341234
   mvc:
     static-path-pattern: /static/**
   jpa:
@@ -36,7 +36,9 @@ spring:
   web:
     resources:
       static-locations: classpath:/static/
-      add-mappings: true
+      add-mappings: true
+
+
       # spring data jpa 설정
 
 impKey: 5741800168864011
